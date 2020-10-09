@@ -4,74 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment"
     android:clipToPadding="false"
-    android:paddingTop="72dp">
+    android:paddingTop="72dp"
+    tools:context=".FirstFragment">
 
     <TextView
         android:id="@+id/TV1"
-        android:layout_width="186dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="151dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
         android:text="@string/last_results"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/TV3"
         app:layout_constraintEnd_toStartOf="@+id/TV2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/TV2"
-        android:layout_width="186dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/off"
-        app:layout_constraintBottom_toTopOf="@+id/TV4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/TV1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintVertical_bias="0.283" />
 
     <TextView
         android:id="@+id/TV6"
-        android:layout_width="186dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="96dp"
-        android:text="@string/inconnu"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/Unknown"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/buttonOff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/TV5" />
 
     <TextView
-        android:id="@+id/TV3"
-        android:layout_width="186dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="96dp"
-        android:text="@string/service_status"
-        app:layout_constraintBottom_toTopOf="@+id/TV5"
-        app:layout_constraintEnd_toStartOf="@+id/TV4"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/TV5"
-        android:layout_width="186dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="96dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/last_alert"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/toggle"
         app:layout_constraintEnd_toStartOf="@+id/TV6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/TV4"
-        android:layout_width="186dp"
-        android:layout_height="120dp"
+        android:id="@+id/TV3"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="14dp"
         android:layout_marginBottom="96dp"
-        android:text="@string/inconnu"
+        android:text="@string/service_status"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/TV5"
+        app:layout_constraintEnd_toStartOf="@+id/TV4"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TV4"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="96dp"
+        android:text="@string/Unknown"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/TV6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -99,4 +99,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/toggle" />
+
+    <ImageView
+        android:id="@+id/TV2"
+        android:layout_width="183dp"
+        android:layout_height="104dp"
+        android:contentDescription="@string/power_description"
+        android:src="@drawable/power_on"
+        app:layout_constraintBottom_toTopOf="@+id/TV4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/TV1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102" />
 </androidx.constraintlayout.widget.ConstraintLayout>

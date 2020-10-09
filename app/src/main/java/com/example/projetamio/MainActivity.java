@@ -24,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -88,16 +90,16 @@ public class MainActivity extends AppCompatActivity{
         on.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView status = findViewById(R.id.TV2);
+                 ImageView status = findViewById(R.id.TV2);
                 switch (MainActivity.status){
                     case 0 :
-                        status.setText("En cours");
+                        status.setImageResource(R.drawable.power_on);
                         startService(service);
                         MainActivity.status = 1;
                         downloading = true;
                         break;
                     case 1 :
-                        status.setText("Arrêté");
+                        status.setImageResource(R.drawable.power_off);
                         stopService(service);
                         MainActivity.status = 0;
                         break;
