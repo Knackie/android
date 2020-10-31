@@ -1,5 +1,5 @@
 package com.example.projetamio;
 
 public class Parameters {
-    public static final String URLData = "https://qmillardet.github.io/API/android/example.json";
+    public static final String URLData = "http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/temperature/last";
 }

@@ -28,9 +28,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
 
@@ -97,45 +96,58 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         Log.d(this.getClass().getName(), "Téléchargement lancé");
     }
 
+
+    /**
+     * {
+     *       "timestamp": 1603588279000,
+     *       "label": "temperature",
+     *       "value": -32.76,
+     *       "mote": "53.105"
+     *     }
+     * @param result
+     */
     @Override
     public void updateFromDownload(Object result){
         boolean changement = false, res;
         if (result instanceof String) {
             String resultString = (String)result;
+            Log.d(this.getClass().getName(), resultString);
             if (resultString.contains("HTTP error code:") || resultString.contains("no protocol:")) {
                 CharSequence text = "Erreur lors du chargement des données";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(this.getBaseContext(), text, duration);
                 toast.show();
-                Log.w(this.getClass().getName(), result.toString());
             }
             else{
-                Log.d(this.getClass().getName(), result.toString());
                 JsonReader reader = null;
                 try {
                     reader = new JsonReader(new InputStreamReader(new ByteArrayInputStream(resultString.getBytes()), "UTF-8"));
                     reader.beginObject();
                     DonneesLampe lampe = null;
+                    TempInfoMote tmpMoteInfo = null;
                     while (reader.hasNext()) {
                         if (reader.nextName() == "data") {
                             reader.beginArray();
                             while (reader.hasNext()) {
                                 reader.beginObject();
+                                tmpMoteInfo = new TempInfoMote();
                                 while (reader.hasNext()) {
                                     String name = reader.nextName();
-                                    if (name.equals("name")) {
-                                        lampe = this.listLampe.getLampe(reader.nextString());
-                                    } else if (name.equals("light")) {
-                                        assert lampe != null;
-                                        res = lampe.addEtat(reader.nextLong());
-                                        if(!changement){
-                                            changement = res;
-                                        }
-                                    } else {
+                                    if (name.equals("mote")) {
+                                        tmpMoteInfo.name = reader.nextString();
+                                    } else if (name.equals("timestamp")) {
+                                        tmpMoteInfo.timestamp = reader.nextLong();
+                                    } else if (name.equals("value")) {
+                                        tmpMoteInfo.value = reader.nextDouble();
+                                    } else if (name.equals("label")) {
+                                        tmpMoteInfo.label = reader.nextString();
+                                    }else {
                                         reader.skipValue();
                                     }
                                 }
                                 reader.endObject();
+                                lampe = this.listLampe.getLampe(tmpMoteInfo.name);
+                                lampe.addEtat(tmpMoteInfo.value, tmpMoteInfo.label, tmpMoteInfo.timestamp);
                             }
                             reader.endArray();
                         }
@@ -330,10 +342,10 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
          */
         private String downloadUrl(URL url) throws IOException {
             InputStream stream = null;
-            HttpsURLConnection connection = null;
+            HttpURLConnection connection = null;
             String result = null;
             try {
-                connection = (HttpsURLConnection) url.openConnection();
+                connection = (HttpURLConnection) url.openConnection();
                 // Timeout for reading InputStream arbitrarily set to 3000ms.
                 connection.setReadTimeout(3000);
                 // Timeout for connection.connect() arbitrarily set to 3000ms.
@@ -347,7 +359,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 connection.connect();
                 publishProgress(DownloadCallback.Progress.CONNECT_SUCCESS);
                 int responseCode = connection.getResponseCode();
-                if (responseCode != HttpsURLConnection.HTTP_OK) {
+                if (responseCode != HttpURLConnection.HTTP_OK) {
                     throw new IOException("HTTP error code: " + responseCode);
                 }
                 // Retrieve the response body as an InputStream.
@@ -387,5 +399,12 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
             }
             return buffer.toString();
         }
+    }
+
+    private class TempInfoMote{
+        public String name;
+        public double value;
+        public String label;
+        public long timestamp;
     }
 }

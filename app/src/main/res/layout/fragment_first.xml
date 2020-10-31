@@ -31,7 +31,7 @@
         android:layout_marginBottom="100dp"
         android:text="@string/Unknown"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOff"
+        app:layout_constraintBottom_toTopOf="@+id/viewMoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/TV5" />
@@ -84,12 +84,12 @@
         android:layout_marginBottom="16dp"
         android:text="On/Off"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonOff"
+        app:layout_constraintEnd_toStartOf="@+id/viewMoteButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonOff"
+        android:id="@+id/viewMoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"

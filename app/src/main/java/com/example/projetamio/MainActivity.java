@@ -109,6 +109,19 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        Button showMote = findViewById(R.id.viewMoteButton);
+        showMote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // doStuff
+                Intent intentApp = new Intent(MainActivity.this,
+                        ListMoteLayout.class);
+
+                MainActivity.this.startActivity(intentApp);
+
+            }
+        });
+
         CheckBox startAtBoot = findViewById(R.id.startAtBoot);
         startAtBoot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
