@@ -105,7 +105,7 @@
         android:layout_width="183dp"
         android:layout_height="104dp"
         android:contentDescription="@string/power_description"
-        android:src="@drawable/power_on"
+        android:src="@drawable/power_off"
         app:layout_constraintBottom_toTopOf="@+id/TV4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

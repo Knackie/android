@@ -1,5 +1,7 @@
 package com.example.projetamio;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,23 +34,26 @@ public class DonneesLampe {
     public boolean addEtat(Double valeur, String label, Long timetamps){
         switch (label) {
             case "temperature":
-                this.donneesLampe.put(timetamps, valeur);
+                this.dataTemperature.put(timetamps, valeur);
                 this.lastTemperature = timetamps;
                 return true;
             case "light1" :
             case "light2" :
+                Log.d(this.getClass().getName(), "Mote : " + this.getNom() + ", valeur : " + valeur );
                 this.donneesLampe.put(timetamps, valeur);
-                this.lastLight = timetamps;
-                int nbDonne = this.donneesLampe.size();
-                if (Math.abs((this.donneesLampe.get(nbDonne) - this.donneesLampe.get(nbDonne - 1))) >= 15) {
-                    // On vérifie le mode dans lequel mettre la lampe
-                    if (valeur > 250) {
-                        this.etat = true;
-                    } else {
-                        this.etat = false;
+                Double lastValue = this.donneesLampe.get(this.lastLight);
+                if (lastValue != null){
+                    if (Math.abs(valeur -lastValue ) >= 15) {
+                        // On vérifie le mode dans lequel mettre la lampe
+                        if (valeur > 250) {
+                            this.etat = true;
+                        } else {
+                            this.etat = false;
+                        }
+                        return true;
                     }
-                    return true;
                 }
+                this.lastLight = timetamps;
                 break;
             case "battery_indicator":
                 this.dataBattery.put(timetamps, valeur);
@@ -57,6 +62,7 @@ public class DonneesLampe {
             case "humidity":
                 this.dataHumidity.put(timetamps, valeur);
                 this.lastHumidity = timetamps;
+                return true;
 
         }
         return false;
@@ -64,5 +70,21 @@ public class DonneesLampe {
 
     public String getNom() {
         return nom;
+    }
+
+    @Override
+    public String toString() {
+        return "DonneesLampe{" +
+                "nom='" + nom + '\'' +
+                ", donneesLampe=" + donneesLampe +
+                ", lastLight=" + lastLight +
+                ", dataTemperature=" + dataTemperature +
+                ", lastTemperature=" + lastTemperature +
+                ", dataHumidity=" + dataHumidity +
+                ", lastHumidity=" + lastHumidity +
+                ", dataBattery=" + dataBattery +
+                ", lastBattery=" + lastBattery +
+                ", etat=" + etat +
+                '}';
     }
 }

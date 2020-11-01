@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -28,16 +29,12 @@ public class ListMoteLayout extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
+        ListLampe lamp = ListLampe.getInstance();
+        ArrayList<String> mdata = new ArrayList<String>(lamp.getLampeName());
 
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
+        Log.d(this.getClass().getName(), mdata.toString());
 
-
-        mAdapter = new MyAdapter(this, animalNames);
+        mAdapter = new MyAdapter(this, mdata);
         recyclerView.setAdapter(mAdapter);
     }
 }

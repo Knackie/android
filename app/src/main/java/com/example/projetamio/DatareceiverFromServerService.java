@@ -111,7 +111,6 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         boolean changement = false, res;
         if (result instanceof String) {
             String resultString = (String)result;
-            Log.d(this.getClass().getName(), resultString);
             if (resultString.contains("HTTP error code:") || resultString.contains("no protocol:")) {
                 CharSequence text = "Erreur lors du chargement des données";
                 int duration = Toast.LENGTH_SHORT;
@@ -126,7 +125,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                     DonneesLampe lampe = null;
                     TempInfoMote tmpMoteInfo = null;
                     while (reader.hasNext()) {
-                        if (reader.nextName() == "data") {
+                        if (reader.nextName().equals("data")) {
                             reader.beginArray();
                             while (reader.hasNext()) {
                                 reader.beginObject();
@@ -174,7 +173,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 }
             }
         }
-        if (changement || true){
+        if (changement){
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -194,7 +193,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
             chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(chooserIntent);
         }
-
+        Log.d(this.getClass().getName(), listLampe.toString());
     }
 
     @Override
