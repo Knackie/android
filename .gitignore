@@ -86,3 +86,5 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+/scripts/
+/TP1 - Sujet - Android.pdf

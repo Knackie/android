@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProjetAMIO</string>
+    <string name="action_settings">Réglages</string>
+    <string name="first_fragment_label">Premier morceau</string>
+    <string name="second_fragment_label">Dexième morceau</string>
+    <string name="next">Suivant</string>
+    <string name="previous">Précédent</string>
+    <string name="hello_first_fragment">Bienvenu premier morceau</string>
+    <string name="hello_second_fragment">Bienvenu dexième morceau. Arg: %1$s</string>
+    <string name="service_status">"Status du service : "</string>
+    <string name="last_results">"Derniers résultats : "</string>
+    <string name="last_alert">"Dernière alerte : "</string>
+    <string name="interogation_point">\?\\?\\?</string>
+    <string name="off">Arrêté</string>
+    <string name="title_activity_settings">Réglages</string>
+    <string name="hello_world">"Hello World :) "</string>
+    <string name="Unknown">Inconnu</string>
+    <string name="yourname">Votre nom</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="provide_username">Merci de donner votre nom d\'utilisateur</string>
+    <string name="power_description">Indique si le service à déjà été démarré</string>
+    <string name="hello_blank_fragment">TODO : Changer le texte</string>
+</resources>

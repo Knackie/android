@@ -2,6 +2,7 @@ package com.example.projetamio;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ListLampe {
 
@@ -15,7 +16,7 @@ public class ListLampe {
 
     public DonneesLampe getLampe(String nomLampe){
         DonneesLampe lampe = this.listLampe.get(nomLampe);
-        if (lampe != null){
+        if (lampe == null){
             lampe = new DonneesLampe(nomLampe);
             this.listLampe.put(nomLampe, lampe);
         }
@@ -32,5 +33,16 @@ public class ListLampe {
             new ListLampe();
         }
         return ListLampe.instance;
+    }
+
+    public Set<String> getLampeName(){
+        return this.listLampe.keySet();
+    }
+
+    @Override
+    public String toString() {
+        return "ListLampe{" +
+                "listLampe=" + listLampe.toString() +
+                '}';
     }
 }
