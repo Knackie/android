@@ -21,4 +21,17 @@
     <string name="provide_username">Merci de donner votre nom d\'utilisateur</string>
     <string name="power_description">Indique si le service à déjà été démarré</string>
     <string name="hello_blank_fragment">TODO : Changer le texte</string>
+    <string name="email_light_subject">Un mouvement a été detecté</string>
+    <string name="email_light_content">Une nouvelle lumière à été allumée</string>
+    <string name="pp_title_enable_notification">Activer les notifications</string>
+    <string name="pp_title_notification_begin">Heure à laquelle le système bascule sur des notification par email</string>
+    <string name="pp_email_begin">Heure de bascule en email</string>
+    <string name="pp_email_begin_desc">Heure à laquelle le système bascule sur des notification par email</string>
+    <string name="pp_email_end">Heure de de bascule en notification push</string>
+    <string name="pp_email_end_desc">Heure à laquelle le système bascule sur des notification push</string>
+    <string name="pp_notification_group_title">Paramètre des notifications</string>
+    <string name="channel_name">Notification</string>
+    <string name="channel_description">Description notification</string>
+    <string name="notification_title">Lumière allumée</string>
+    <string name="notification_desc">Une ou plusieurs lumières sont allumées</string>
 </resources>

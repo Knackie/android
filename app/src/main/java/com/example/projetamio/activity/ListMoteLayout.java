@@ -1,4 +1,4 @@
-package com.example.projetamio;
+package com.example.projetamio.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.projetamio.datamanagement.ListLampe;
+import com.example.projetamio.R;
 
 import java.util.ArrayList;
 

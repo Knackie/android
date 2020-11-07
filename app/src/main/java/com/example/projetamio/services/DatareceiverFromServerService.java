@@ -1,12 +1,12 @@
-package com.example.projetamio;
+package com.example.projetamio.services;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,6 +22,11 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.projetamio.datamanagement.DonneesLampe;
+import com.example.projetamio.datamanagement.ListLampe;
+import com.example.projetamio.config.Parameters;
+import com.example.projetamio.R;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,10 +35,9 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.channels.InterruptedByTimeoutException;
 
-import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
-
-public class DatareceiverFromServerService extends Service implements DownloadCallback{
+public class DatareceiverFromServerService extends Service implements DownloadCallback {
 
     private boolean downloading;
 //    private NetworkFragment networkFragment;
@@ -63,8 +67,8 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
             startMyOwnForeground();
         else
             startForeground(1, new Notification());
-        Log.d("Download", "Je passe bien là");
         this.startDownload();
+        this.stopSelf();
     }
 
     private void startMyOwnForeground(){
@@ -111,6 +115,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         boolean changement = false, res;
         if (result instanceof String) {
             String resultString = (String)result;
+            Log.d(this.getClass().getName(), resultString);
             if (resultString.contains("HTTP error code:") || resultString.contains("no protocol:")) {
                 CharSequence text = "Erreur lors du chargement des données";
                 int duration = Toast.LENGTH_SHORT;
@@ -146,7 +151,11 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                                 }
                                 reader.endObject();
                                 lampe = this.listLampe.getLampe(tmpMoteInfo.name);
+                                boolean prevState = lampe.isEtat();
                                 lampe.addEtat(tmpMoteInfo.value, tmpMoteInfo.label, tmpMoteInfo.timestamp);
+                                if (lampe.isEtat() != prevState){
+                                    changement = true;
+                                }
                             }
                             reader.endArray();
                         }
@@ -174,6 +183,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
             }
         }
         if (changement){
+            Log.d(this.getClass().getName(), "Changement detecté");
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -181,19 +191,69 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 //deprecated in API 26
                 v.vibrate(500);
             }
-            Intent emailIntent = new Intent();
-            emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            emailIntent.setAction(Intent.ACTION_SEND);
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, "quentin.millardet@telecomnancy.eu");
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Mouvement détecté");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "Du mouvement à été detecté par l'application");
-            emailIntent.setType("text/plain");
-            Intent chooserIntent = Intent.createChooser(emailIntent,"Envoyer à ");
-            chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(chooserIntent);
+
+            if (this.isInEmailHour()){
+                Intent emailIntent = new Intent();
+                emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.setAction(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                String PREFS_NAME = Parameters.PrefName;
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                String destEmail = settings.getString("emailString", Parameters.DefaultEmail);
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, destEmail);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_light_subject));
+                emailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_light_content));
+                emailIntent.setType("text/plain");
+                Intent chooserIntent = Intent.createChooser(emailIntent,"Envoyer à ");
+                chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(chooserIntent);
+            }
+            else {
+                // The id of the channel.
+                String id = "my_channel_01";
+                Notification.Builder notificationBuilder = new Notification.Builder(this, id);
+
+                notificationBuilder.setAutoCancel(true)
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.power_on)
+                        .setTicker("projetAMIO")
+                        .setContentTitle(getString(R.string.notification_title))
+                        .setContentText(getString(R.string.notification_desc));
+
+                NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+// The user-visible name of the channel.
+                CharSequence name = getString(R.string.channel_name);
+
+// The user-visible description of the channel.
+                String description = getString(R.string.channel_description);
+
+                int importance = NotificationManager.IMPORTANCE_LOW;
+
+                NotificationChannel mChannel = new NotificationChannel(id, name,importance);
+
+// Configure the notification channel.
+                mChannel.setDescription(description);
+
+                mChannel.enableLights(true);
+// Sets the notification light color for notifications posted to this
+// channel, if the device supports this feature.
+                mChannel.setLightColor(Color.RED);
+
+                mChannel.enableVibration(true);
+                mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+                notificationManager.createNotificationChannel(mChannel);
+                notificationManager.notify(1, notificationBuilder.build());
+            }
+
         }
-        Log.d(this.getClass().getName(), listLampe.toString());
+
+
+    }
+
+    private boolean isInEmailHour() {
+        return false;
     }
 
     @Override

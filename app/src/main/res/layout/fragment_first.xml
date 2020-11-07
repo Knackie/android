@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:paddingTop="72dp"
-    tools:context=".FirstFragment">
+    tools:context=".activity.FirstFragment">
 
     <TextView
         android:id="@+id/TV1"

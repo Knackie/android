@@ -1,44 +1,29 @@
-package com.example.projetamio;
+package com.example.projetamio.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 
-import android.preference.Preference;
-import android.util.JsonReader;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import com.example.projetamio.datamanagement.ListLampe;
+import com.example.projetamio.services.MainService;
+import com.example.projetamio.R;
+import com.example.projetamio.config.Parameters;
 
 public class MainActivity extends AppCompatActivity{
 
     private static int status = 0;
-    public static final String PREFS_NAME = "MyPrefsFile";
+    public static final String PREFS_NAME = Parameters.PrefName;
     // Keep a reference to the NetworkFragment, which owns the AsyncTask object
     // that is used to execute network ops.
 //    private NetworkFragment networkFragment;
@@ -126,7 +111,6 @@ public class MainActivity extends AppCompatActivity{
         startAtBoot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d(this.getClass().getName(), "changement d'état" + isChecked );
                 String etat = "";
                 if (isChecked){
                     etat = "coché";
@@ -136,7 +120,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("startAtBoot", isChecked);
+                editor.putBoolean("star tAtBoot", isChecked);
                 editor.commit();
             }
         });

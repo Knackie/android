@@ -1,6 +1,9 @@
-package com.example.projetamio;
+package com.example.projetamio.datamanagement;
 
+import android.content.Intent;
 import android.util.Log;
+
+import com.example.projetamio.services.NotifyChoiceService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +53,6 @@ public class DonneesLampe {
                         } else {
                             this.etat = false;
                         }
-                        return true;
                     }
                 }
                 this.lastLight = timetamps;

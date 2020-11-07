@@ -1,4 +1,4 @@
-package com.example.projetamio;
+package com.example.projetamio.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.projetamio.R;
 
 public class FirstFragment extends Fragment {
 

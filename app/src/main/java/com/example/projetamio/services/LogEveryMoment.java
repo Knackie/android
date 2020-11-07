@@ -1,4 +1,4 @@
-package com.example.projetamio;
+package com.example.projetamio.services;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ public class LogEveryMoment extends TimerTask {
 
     @Override
     public void run() {
-        Log.d("LogEvetyMoment","Log : " + LogEveryMoment.number);
+        //Log.d("LogEvetyMoment","Log : " + LogEveryMoment.number);
         LogEveryMoment.number++;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(new Intent(context, DatareceiverFromServerService.class));

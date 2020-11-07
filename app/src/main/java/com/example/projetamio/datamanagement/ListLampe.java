@@ -1,6 +1,5 @@
-package com.example.projetamio;
+package com.example.projetamio.datamanagement;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 

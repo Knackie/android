@@ -1,4 +1,4 @@
-package com.example.projetamio;
+package com.example.projetamio.services;
 
 import android.net.NetworkInfo;
 

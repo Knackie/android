@@ -26,4 +26,17 @@
     <string name="provide_username">Please provide your username</string>
     <string name="power_description">indicate if the service was already turn on</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_light_subject">Detected movement</string>
+    <string name="email_light_content">A new light is up</string>
+    <string name="pp_title_enable_notification">Enable notification</string>
+    <string name="pp_title_notification_begin">Hour where application send email notification</string>
+    <string name="pp_email_begin">Hour where notification mechanism send email</string>
+    <string name="pp_email_begin_desc">Hour where the notification system move to email</string>
+    <string name="pp_email_end">Begin notification mechinism</string>
+    <string name="pp_email_end_desc">Hour where notification mechanism change to push notification</string>
+    <string name="pp_notification_group_title">Notification setting</string>
+    <string name="channel_name">Notification</string>
+    <string name="channel_description">Notification description</string>
+    <string name="notification_title">Light on</string>
+    <string name="notification_desc">One or more light as been turn on</string>
 </resources>

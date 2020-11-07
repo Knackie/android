@@ -1,21 +1,10 @@
-package com.example.projetamio;
+package com.example.projetamio.services;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.IBinder;
-import android.util.JsonReader;
-import android.util.Log;
-import android.widget.Toast;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainService extends Service {
     private boolean downloading = false;
