@@ -8,19 +8,42 @@
 
         <SwitchPreference
             android:defaultValue="true"
-            android:key="switch_preference_1"
+            android:key="notification_switch_enable"
             android:title="@string/pp_title_enable_notification" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:key="edit_text_preference_1"
+            android:key="hour_begin_notification"
+            android:summary="@string/pp_notification_begin_desc"
+            android:defaultValue="19:00"
+            android:title="@string/pp_notification_begin" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="hour_end_notification"
+            android:summary="@string/pp_notification_end_desc"
+            android:defaultValue="23:00"
+            android:title="@string/pp_notification_end" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pp_email_group_title">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="email_switch_enable"
+            android:title="@string/pp_title_enable_email" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="hour_begin_email"
             android:summary="@string/pp_email_begin_desc"
+            android:defaultValue="19:00"
             android:title="@string/pp_email_begin" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:key="edit_text_preference_3"
-            android:summary="@string/pp_email_begin_desc"
-            android:title="@string/pp_email_end_desc" />
+            android:defaultValue="23:00"
+            android:key="hour_end_email"
+            android:summary="@string/pp_email_end_desc"
+            android:title="@string/pp_email_end" />
     </PreferenceCategory>
 </PreferenceScreen>

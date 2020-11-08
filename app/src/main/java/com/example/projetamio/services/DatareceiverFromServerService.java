@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Toast;
@@ -36,9 +37,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.channels.InterruptedByTimeoutException;
+import java.util.Calendar;
 
 public class DatareceiverFromServerService extends Service implements DownloadCallback {
 
+    private static final String PREFS_NAME = Parameters.PrefName;
     private boolean downloading;
 //    private NetworkFragment networkFragment;
     private ListLampe listLampe;
@@ -208,7 +211,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chooserIntent);
             }
-            else {
+            if  (this.isNotificationHour()){
                 // The id of the channel.
                 String id = "my_channel_01";
                 Notification.Builder notificationBuilder = new Notification.Builder(this, id);
@@ -250,6 +253,38 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         }
 
 
+    }
+
+    private boolean isNotificationHour() {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // On vérifie que les notifications n'ont pas été desactivées par l'utilisateur
+        if (settings.getBoolean("notification_switch_enable", false)){
+
+            if  (Parameters.isWeekDay(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))){
+
+                // On récupère les heures et dates en string, il faut donc les convertir en Int
+
+                String[] stringDebut = settings.getString("hour_begin_notification", "00:00").split(":");
+                String[] stringEnd = settings.getString("hour_end_notification", "00:00").split(":");
+                int hoursBegin = Integer.parseInt(stringDebut[0]), minuteBegin = Integer.parseInt(stringDebut[1]);
+                int hoursEnd = Integer.parseInt(stringEnd[0]), minuteEnd = Integer.parseInt(stringEnd[1]);
+                int hnow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), mnow =  Calendar.getInstance().get(Calendar.MINUTE);
+                if (hoursBegin < hnow && hnow < hoursEnd){
+                    return true;
+                }
+                else if (hoursBegin == hnow){
+                    if (minuteBegin <= mnow){
+                        return true;
+                    }
+                }else if (hoursEnd == hnow){
+                    if (mnow <= minuteEnd){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private boolean isInEmailHour() {

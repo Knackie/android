@@ -39,4 +39,10 @@
     <string name="channel_description">Notification description</string>
     <string name="notification_title">Light on</string>
     <string name="notification_desc">One or more light as been turn on</string>
+    <string name="pp_notification_begin">Hour begin send push notification</string>
+    <string name="pp_notification_begin_desc">Hour where the application begin to send push notification to user</string>
+    <string name="pp_email_group_title">Email Setting</string>
+    <string name="pp_title_enable_email">Enable Email</string>
+    <string name="pp_notification_end_desc">Hour where the application stop to send notification</string>
+    <string name="pp_notification_end">Hour stop send notification</string>
 </resources>
