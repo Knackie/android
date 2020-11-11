@@ -45,5 +45,20 @@
             android:key="hour_end_email"
             android:summary="@string/pp_email_end_desc"
             android:title="@string/pp_email_end" />
+
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="hour_begin_email_weekend"
+            android:summary="@string/pp_email_begin_desc_weekend"
+            android:defaultValue="19:00"
+            android:title="@string/pp_email_begin_weekend" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="23:00"
+            android:key="hour_end_email_weekend"
+            android:summary="@string/pp_email_end_desc_weekend"
+            android:title="@string/pp_email_end_weekend" />
     </PreferenceCategory>
 </PreferenceScreen>

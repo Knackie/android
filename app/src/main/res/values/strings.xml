@@ -45,4 +45,8 @@
     <string name="pp_title_enable_email">Enable Email</string>
     <string name="pp_notification_end_desc">Hour where the application stop to send notification</string>
     <string name="pp_notification_end">Hour stop send notification</string>
+    <string name="pp_email_begin_desc_weekend">Hour where notification mechanism send email</string>
+    <string name="pp_email_begin_weekend">Hour where notification mechanism send email</string>
+    <string name="pp_email_end_desc_weekend">Hour where notification mechanism stop send email</string>
+    <string name="pp_email_end_weekend">Hour where notification mechanism stop send email</string>
 </resources>

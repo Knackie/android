@@ -40,4 +40,8 @@
     <string name="pp_notification_end">Heure de fin d\'envoi des notifications</string>
     <string name="pp_notification_end_desc">Heure à laquelle l\'application arrête d\'envoyer des notification push</string>
     <string name="pp_title_enable_email">Activation des emails</string>
+    <string name="pp_email_end_desc_weekend">Heure à laquelle l\'application arrête d\'envoyer des mails le weekend</string>
+    <string name="pp_email_end_weekend">Heure de fin d\'envoi des mails le weekend</string>
+    <string name="pp_email_begin_weekend">Heure de bascule en email le weekend</string>
+    <string name="pp_email_begin_desc_weekend">Heure à laquelle le système bascule sur des notification par email le weekend</string>
 </resources>

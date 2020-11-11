@@ -156,7 +156,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                                 lampe = this.listLampe.getLampe(tmpMoteInfo.name);
                                 boolean prevState = lampe.isEtat();
                                 lampe.addEtat(tmpMoteInfo.value, tmpMoteInfo.label, tmpMoteInfo.timestamp);
-                                if (lampe.isEtat() != prevState){
+                                if (lampe.isEtat() != prevState && lampe.isEtat()){
                                     changement = true;
                                 }
                             }
@@ -288,6 +288,53 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
     }
 
     private boolean isInEmailHour() {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // On vérifie que les notifications n'ont pas été desactivées par l'utilisateur
+        if (settings.getBoolean("email_switch_enable", false)){
+
+            if  (Parameters.isWeekDay(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))){
+
+                // On récupère les heures et dates en string, il faut donc les convertir en Int
+
+                String[] stringDebut = settings.getString("hour_begin_email", "00:00").split(":");
+                String[] stringEnd = settings.getString("hour_end_email", "00:00").split(":");
+                int hoursBegin = Integer.parseInt(stringDebut[0]), minuteBegin = Integer.parseInt(stringDebut[1]);
+                int hoursEnd = Integer.parseInt(stringEnd[0]), minuteEnd = Integer.parseInt(stringEnd[1]);
+                int hnow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), mnow =  Calendar.getInstance().get(Calendar.MINUTE);
+                if (hoursBegin < hnow && hnow < hoursEnd){
+                    return true;
+                }
+                else if (hoursBegin == hnow){
+                    if (minuteBegin <= mnow){
+                        return true;
+                    }
+                }else if (hoursEnd == hnow){
+                    if (mnow <= minuteEnd){
+                        return true;
+                    }
+                }
+            }
+            else if (Parameters.isWeekEndDay(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))){
+                String[] stringDebut = settings.getString("hour_begin_email_weekend", "00:00").split(":");
+                String[] stringEnd = settings.getString("hour_end_email_weekend", "00:00").split(":");
+                int hoursBegin = Integer.parseInt(stringDebut[0]), minuteBegin = Integer.parseInt(stringDebut[1]);
+                int hoursEnd = Integer.parseInt(stringEnd[0]), minuteEnd = Integer.parseInt(stringEnd[1]);
+                int hnow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), mnow =  Calendar.getInstance().get(Calendar.MINUTE);
+                if (hoursBegin < hnow && hnow < hoursEnd){
+                    return true;
+                }
+                else if (hoursBegin == hnow){
+                    if (minuteBegin <= mnow){
+                        return true;
+                    }
+                }else if (hoursEnd == hnow){
+                    if (mnow <= minuteEnd){
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
