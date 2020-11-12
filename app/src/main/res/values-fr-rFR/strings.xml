@@ -44,4 +44,8 @@
     <string name="pp_email_end_weekend">Heure de fin d\'envoi des mails le weekend</string>
     <string name="pp_email_begin_weekend">Heure de bascule en email le weekend</string>
     <string name="pp_email_begin_desc_weekend">Heure à laquelle le système bascule sur des notification par email le weekend</string>
+    <string name="état" />
+    <string name="on_off">On/Off</string>
+    <string name="capteurs">Capteurs</string>
+    <string name="tat_du_t_l_chargement">État du téléchargement</string>
 </resources>
