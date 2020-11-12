@@ -9,8 +9,9 @@ Le but principal de cette application est de :
 # Fonctionnement de l'application 
 
 Une fois l'application lancée, vous arrivez sur un menu d'accueil.
-
-<div style="text-align:center"><img src="img/main_menu.PNG" /></div>
+<p align="center">
+  <img src="img/main_menu.PNG" />
+</p>
 
 Sur ce menu, l'état du téléchargement est visible (en rouge s'il est desactivé, en vert s'il est activé).
 Un bouton on/off permet l'activation ou la desactivation de ce menu.
