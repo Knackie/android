@@ -23,7 +23,7 @@ Un bouton on/off permet l'activation ou la desactivation de ce menu.
 Un bouton capteur redirige vers les différents capteurs et les mesures associées.
 
 <p align="center">
-  <img src="img/siderbar_button.PNG" height="100" />
+  <img src="img/sidebar_button.PNG" height="100" />
 </p>
 Il est possible de définir des réglages en haut à droite en cliquant sur les 3 points.
 
