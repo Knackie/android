@@ -10,79 +10,22 @@
 
     <TextView
         android:id="@+id/TV1"
-        android:layout_width="151dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:text="@string/last_results"
+        android:layout_width="150dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/tat_du_t_l_chargement"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/TV3"
         app:layout_constraintEnd_toStartOf="@+id/TV2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283" />
-
-    <TextView
-        android:id="@+id/TV6"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/Unknown"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/viewMoteButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/TV5" />
-
-    <TextView
-        android:id="@+id/TV5"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/last_alert"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/toggle"
-        app:layout_constraintEnd_toStartOf="@+id/TV6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/TV3"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="96dp"
-        android:text="@string/service_status"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/TV5"
-        app:layout_constraintEnd_toStartOf="@+id/TV4"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/TV4"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="96dp"
-        android:text="@string/Unknown"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/TV6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/TV3" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/toggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="On/Off"
+        android:text="@string/on_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/viewMoteButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -94,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginBottom="16dp"
-        android:text="Useless"
+        android:text="@string/capteurs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -104,12 +47,11 @@
         android:id="@+id/TV2"
         android:layout_width="183dp"
         android:layout_height="104dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/power_description"
         android:src="@drawable/power_off"
-        app:layout_constraintBottom_toTopOf="@+id/TV4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/TV1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
