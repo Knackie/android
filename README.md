@@ -10,10 +10,24 @@ Le but principal de cette application est de :
 
 Une fois l'application lancée, vous arrivez sur un menu d'accueil.
 <p align="center">
-  <img src="img/main_menu.PNG" />
+  <img src="img/main_menu.PNG" height="500" />
 </p>
 
 Sur ce menu, l'état du téléchargement est visible (en rouge s'il est desactivé, en vert s'il est activé).
+
+<p align="center">
+  <img src="img/download_status.PNG" height="100" />
+</p>
+
 Un bouton on/off permet l'activation ou la desactivation de ce menu.
 Un bouton capteur redirige vers les différents capteurs et les mesures associées.
+
+<p align="center">
+  <img src="img/sidebar_button.PNG" height="100" />
+</p>
+
 Il est possible de définir des réglages en haut à droite en cliquant sur les 3 points.
+
+<p align="center">
+  <img src="img/preferences.PNG" height="100" />
+</p>
