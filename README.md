@@ -25,6 +25,7 @@ Un bouton capteur redirige vers les différents capteurs et les mesures associé
 <p align="center">
   <img src="img/sidebar_button.PNG" height="100" />
 </p>
+
 Il est possible de définir des réglages en haut à droite en cliquant sur les 3 points.
 
 <p align="center">
