@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.projetamio.datamanagement.ListLampe;
 import com.example.projetamio.R;
@@ -39,5 +42,20 @@ public class ListMoteLayout extends AppCompatActivity {
 
         mAdapter = new MyAdapter(this, mdata);
         recyclerView.setAdapter(mAdapter);
+    }
+    public void onStart(){
+        super.onStart();
+        Button retour = findViewById(R.id.buttonBack);
+        retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // doStuff
+                Intent intentApp = new Intent(ListMoteLayout.this,
+                        MainActivity.class);
+
+                ListMoteLayout.this.startActivity(intentApp);
+
+            }
+        });
     }
 }

@@ -53,4 +53,6 @@
     <string name="on_off">On/Off</string>
     <string name="capteurs">Capteurs</string>
     <string name="tat_du_t_l_chargement">État du téléchargement</string>
+    <string name="name">Données</string>
+    <string name="RetourButtonNale">Retour</string>
 </resources>

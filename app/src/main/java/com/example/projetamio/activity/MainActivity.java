@@ -94,17 +94,17 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        Button showMote = findViewById(R.id.viewMoteButton);
-        showMote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // doStuff
-                Intent intentApp = new Intent(MainActivity.this,
-                        ListMoteLayout.class);
+            Button showMote = findViewById(R.id.viewMoteButton);
+            showMote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // doStuff
+                    Intent intentApp = new Intent(MainActivity.this,
+                            ListMoteLayout.class);
 
-                MainActivity.this.startActivity(intentApp);
+                    MainActivity.this.startActivity(intentApp);
 
-            }
+                }
         });
 
         CheckBox startAtBoot = findViewById(R.id.startAtBoot);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean("star tAtBoot", isChecked);
+                editor.putBoolean("start At Boot", isChecked);
                 editor.commit();
             }
         });
