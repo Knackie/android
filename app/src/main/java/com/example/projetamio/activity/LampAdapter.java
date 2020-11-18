@@ -5,24 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetamio.R;
+import com.example.projetamio.datamanagement.DonneesLampe;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder> {
-    private List<String> mData;
+    private List<DonneesLampe> mData;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private Context mContext;
 
     // data is passed into the constructor
-    LampAdapter(Context context, List<String> data) {
+    LampAdapter(Context context, List<DonneesLampe> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mContext = context;
     }
 
     // inflates the row layout from xml when needed
@@ -35,8 +39,14 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(LampViewHolder holder, int position) {
-        String nomDuCapteur = mData.get(position);
-        holder.myTextView.setText(nomDuCapteur);
+        DonneesLampe donneesLampe = mData.get(position);
+        holder.myTextView.setText(donneesLampe.getNom());
+        holder.mTemperature.setText("Température = " + donneesLampe.getLastTemperature().toString());
+        if (donneesLampe.isAllume()) {
+            holder.mLampeStatus.setImageResource(R.drawable.light_on);
+        } else {
+            holder.mLampeStatus.setImageResource(R.drawable.light_off);
+        }
     }
 
     // total number of rows
@@ -47,35 +57,16 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
 
 
     // stores and recycles views as they are scrolled off screen
-    public class LampViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class LampViewHolder extends RecyclerView.ViewHolder {
         TextView myTextView;
-        Button buttonData;
+        TextView mTemperature;
+        ImageView mLampeStatus;
 
         LampViewHolder(View itemView) {
             super(itemView);
-            buttonData = itemView.findViewById(R.id.buttonData);
             myTextView = itemView.findViewById(R.id.tvCapteur);
-            itemView.setOnClickListener(this);
+            mTemperature = itemView.findViewById(R.id.tvBatterie);
+            mLampeStatus = itemView.findViewById(R.id.tvLamp);
         }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
-    }
-
-    // convenience method for getting data at click position
-    String getItem(int id) {
-        return mData.get(id);
-    }
-
-    // allows clicks events to be caught
-    void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

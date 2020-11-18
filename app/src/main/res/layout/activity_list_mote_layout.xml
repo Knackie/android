@@ -5,7 +5,7 @@
     android:id="@+id/allmoteconstraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ListMoteLayout">
+    tools:context=".activity.ListMoteActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allmoterecyclerview"

@@ -1,7 +1,7 @@
 package com.example.projetamio.datamanagement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class ListLampe {
 
@@ -34,8 +34,8 @@ public class ListLampe {
         return ListLampe.instance;
     }
 
-    public Set<String> getLampeName(){
-        return this.listLampe.keySet();
+    public ArrayList getDonneesLampList(){
+        return new ArrayList(listLampe.values());
     }
 
     @Override

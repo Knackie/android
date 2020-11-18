@@ -1,21 +1,20 @@
 package com.example.projetamio.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
 import com.example.projetamio.datamanagement.ListLampe;
 import com.example.projetamio.R;
 
 import java.util.ArrayList;
 
-public class ListMoteLayout extends AppCompatActivity {
+public class ListMoteActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -36,26 +35,17 @@ public class ListMoteLayout extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         ListLampe lamp = ListLampe.getInstance();
-        ArrayList<String> mdata = new ArrayList<String>(lamp.getLampeName());
 
-        Log.d(this.getClass().getName(), mdata.toString());
-
-        mAdapter = new LampAdapter(this, mdata);
+        mAdapter = new LampAdapter(this, lamp.getDonneesLampList());
         recyclerView.setAdapter(mAdapter);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
-    public void onStart(){
-        super.onStart();
-        Button retour = findViewById(R.id.buttonBack);
-        retour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // doStuff
-                Intent intentApp = new Intent(ListMoteLayout.this,
-                        MainActivity.class);
 
-                ListMoteLayout.this.startActivity(intentApp);
-
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBackPressed();
+        return true;
     }
 }

@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetAMIO"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ListMoteLayout"></activity>
+        <activity android:name=".activity.ListMoteActivity"></activity>
 
         <service
             android:name=".services.MainService"

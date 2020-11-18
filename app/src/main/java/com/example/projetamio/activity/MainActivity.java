@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity{
                 public void onClick(View v) {
                     // doStuff
                     Intent intentApp = new Intent(MainActivity.this,
-                            ListMoteLayout.class);
+                            ListMoteActivity.class);
 
                     MainActivity.this.startActivity(intentApp);
 

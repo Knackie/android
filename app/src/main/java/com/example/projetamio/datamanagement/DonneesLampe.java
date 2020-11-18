@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class DonneesLampe {
 
+    public static final int SEUIL_ALLUME_ETEINT = 250;
     private final String nom;
     private final HashMap<Long, Double> donneesLampe;
     private Long lastLight;
@@ -48,7 +49,7 @@ public class DonneesLampe {
                 if (lastValue != null){
                     if (Math.abs(valeur -lastValue ) >= 15) {
                         // On vérifie le mode dans lequel mettre la lampe
-                        if (valeur > 250) {
+                        if (valeur > SEUIL_ALLUME_ETEINT) {
                             this.etat = true;
                         } else {
                             this.etat = false;
@@ -73,6 +74,25 @@ public class DonneesLampe {
     public String getNom() {
         return nom;
     }
+
+    public boolean isAllume() {
+        return this.donneesLampe.get(lastLight) > SEUIL_ALLUME_ETEINT;
+    }
+
+    public Double getLastTemperature() {
+        return dataTemperature.get(lastTemperature);
+    }
+
+    public Double getLastHumidity() {
+        return dataHumidity.get(lastHumidity);
+    }
+
+    public Double getLastBattery() {
+        return dataBattery.get(lastBattery);
+    }
+
+
+
 
     @Override
     public String toString() {
