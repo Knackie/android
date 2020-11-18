@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:itemCount="4"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="70dp"
+        tools:layout_editor_absoluteX="-57dp"
+        tools:layout_editor_absoluteY="0dp"
         tools:listitem="@layout/recycler_view_item" />
 
     <Button

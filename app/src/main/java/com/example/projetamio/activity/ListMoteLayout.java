@@ -40,7 +40,7 @@ public class ListMoteLayout extends AppCompatActivity {
 
         Log.d(this.getClass().getName(), mdata.toString());
 
-        mAdapter = new MyAdapter(this, mdata);
+        mAdapter = new LampAdapter(this, mdata);
         recyclerView.setAdapter(mAdapter);
     }
     public void onStart(){
