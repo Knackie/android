@@ -19,13 +19,12 @@
       app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-      android:id="@+id/tvBatterie"
+      android:id="@+id/tvTemperature"
       android:layout_width="258dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
       android:text="TextView"
       android:textAlignment="center"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/tvCapteur" />
@@ -39,5 +38,28 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/light_off" />
+
+  <TextView
+      android:id="@+id/tvHumidity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="TextView"
+      android:textAlignment="center"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvTemperature" />
+
+  <TextView
+      android:id="@+id/tvBattery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="TextView"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvHumidity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,6 +47,8 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
         } else {
             holder.mLampeStatus.setImageResource(R.drawable.light_off);
         }
+        holder.mHumidite.setText("Humidité = " + donneesLampe.getLastHumidity() + "");
+        holder.mBattery.setText("Batterie = " + donneesLampe.getLastBattery() + "");
     }
 
     // total number of rows
@@ -60,13 +62,17 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
     public class LampViewHolder extends RecyclerView.ViewHolder {
         TextView myTextView;
         TextView mTemperature;
+        TextView mHumidite;
+        TextView mBattery;
         ImageView mLampeStatus;
 
         LampViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.tvCapteur);
-            mTemperature = itemView.findViewById(R.id.tvBatterie);
+            mTemperature = itemView.findViewById(R.id.tvTemperature);
             mLampeStatus = itemView.findViewById(R.id.tvLamp);
+            mHumidite = itemView.findViewById(R.id.tvHumidity);
+            mBattery = itemView.findViewById(R.id.tvBattery);
         }
     }
 }

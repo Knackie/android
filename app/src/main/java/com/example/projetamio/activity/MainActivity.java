@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity{
 
         Intent service = new Intent(this, MainService.class);
 
-        // Gestion du bouton toggle
+        // Button toggle management
 
         Button on = findViewById(R.id.toggle);
         on.setOnClickListener(new View.OnClickListener() {
