@@ -48,7 +48,7 @@ public class DonneesLampe {
                 Double lastValue = this.donneesLampe.get(this.lastLight);
                 if (lastValue != null){
                     if (Math.abs(valeur -lastValue ) >= 15) {
-                        // On vérifie le mode dans lequel mettre la lampe
+                        // Check on which mode put the lamp
                         if (valeur > SEUIL_ALLUME_ETEINT) {
                             this.etat = true;
                         } else {
@@ -76,10 +76,12 @@ public class DonneesLampe {
     }
 
     public boolean isAllume() {
+        //return the last data of light, with check on seuil
         return this.donneesLampe.get(lastLight) > SEUIL_ALLUME_ETEINT;
     }
 
     public Double getLastTemperature() {
+        //return the last temperature with timestamp of last temperature
         return dataTemperature.get(lastTemperature);
     }
 
