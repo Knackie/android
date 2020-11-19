@@ -33,7 +33,7 @@ public class ListMoteActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // specify an adapter (see also next example)
+        // specify an adapter
         ListLampe lamp = ListLampe.getInstance();
 
         mAdapter = new LampAdapter(this, lamp.getDonneesLampList());

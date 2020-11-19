@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity{
             showMote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // doStuff
                     Intent intentApp = new Intent(MainActivity.this,
                             ListMoteActivity.class);
 
