@@ -39,12 +39,12 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(LampViewHolder holder, int position) {
-        //Manage the view of the recyclerView
+        // Manage the view of the recyclerView
         DonneesLampe donneesLampe = mData.get(position);
         holder.myTextView.setText(donneesLampe.getNom());
         holder.mTemperature.setText("Température = " + donneesLampe.getLastTemperature().toString());
         if (donneesLampe.isAllume()) {
-            //Check the state of lampe, and show image with state
+            // Check the state of lampe, and show image with state
             holder.mLampeStatus.setImageResource(R.drawable.light_on);
         } else {
             holder.mLampeStatus.setImageResource(R.drawable.light_off);
@@ -62,7 +62,7 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
 
     // stores and recycles views as they are scrolled off screen
     public class LampViewHolder extends RecyclerView.ViewHolder {
-        //Here is define some text and image for the recyclerView
+        // Here is define some text and image for the recyclerView
         TextView myTextView;
         TextView mTemperature;
         TextView mHumidite;
