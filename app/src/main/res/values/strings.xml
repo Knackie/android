@@ -49,10 +49,10 @@
     <string name="pp_email_begin_weekend">Hour where notification mechanism send email</string>
     <string name="pp_email_end_desc_weekend">Hour where notification mechanism stop send email</string>
     <string name="pp_email_end_weekend">Hour where notification mechanism stop send email</string>
-    <string name="état" />
+    <string name="état" >state</string>
     <string name="on_off">On/Off</string>
     <string name="capteurs">Capteurs</string>
     <string name="tat_du_t_l_chargement">État du téléchargement</string>
-    <string name="name">Données</string>
-    <string name="RetourButtonNale">Retour</string>
+    <string name="name">Data</string>
+    <string name="RetourButtonNale">Return</string>
 </resources>
