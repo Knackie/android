@@ -68,7 +68,15 @@ public class MainActivity extends AppCompatActivity{
 
         Intent service = new Intent(this, MainService.class);
 
-        // Button toggle management
+        ImageView status = findViewById(R.id.TV2);
+        if (MainService.create){
+            status.setImageResource(R.drawable.power_on);
+        }
+        else{
+            status.setImageResource(R.drawable.power_off);
+        }
+
+        // Gestion du bouton toggle
 
         Button on = findViewById(R.id.toggle);
         on.setOnClickListener(new View.OnClickListener() {
