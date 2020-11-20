@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
-import com.example.projetamio.datamanagement.ListLampe;
 import com.example.projetamio.services.MainService;
 import com.example.projetamio.R;
 import com.example.projetamio.config.Parameters;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent service = new Intent(this, MainService.class);
 
-        ImageView status = findViewById(R.id.ImageDownloadStatus);
+        ImageView status = findViewById(R.id.imageDownloadStatus);
         if (MainService.active){
             status.setImageResource(R.drawable.power_on);
         }
