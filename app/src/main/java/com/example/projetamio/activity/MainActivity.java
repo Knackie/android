@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             status.setImageResource(R.drawable.power_off);
         }
 
-        // Gestion du bouton toggle
+        // Button on management
         Button on = findViewById(R.id.toggle);
         on.setOnClickListener(v -> {
             if (downloading) {
