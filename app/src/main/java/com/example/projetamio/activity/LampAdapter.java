@@ -40,7 +40,7 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
         // Manage the view of the recyclerView
         DonneesLampe donneesLampe = mData.get(position);
         holder.myTextView.setText(donneesLampe.getNom());
-        holder.mTemperature.setText("Température = " + donneesLampe.getLastTemperature().toString());
+        holder.mTemperature.setText("Température = " + donneesLampe.getLastTemperature() + "");
         if (donneesLampe.isAllume()) {
             // Check the state of lamp, and show image with state
             holder.mLampeStatus.setImageResource(R.drawable.light_on);
