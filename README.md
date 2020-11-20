@@ -2,8 +2,8 @@
 
 Le but principal de cette application est de : 
 - lister dans l'activité principale les capteurs actifs et les valeurs de luminosité qu'ils relèvent,en mettant en évidence ceux qui indiquent la présence d'une lumière active
-- émettre une notification si une nouvelle lumière vient d'être allumée en semaine entre 19h et23h, en spécifiant le capteur impliqué
-- envoyer un email si cet événement survient le week-end entre 19h et 23h ou en semaineentre 23h et 6h.
+- émettre une notification si une nouvelle lumière vient d'être allumée en semaine entre **19h** et **23h**, en spécifiant le capteur impliqué
+- envoyer un email si cet événement survient le week-end entre 19h et 23h ou en semaineentre **23h** et **6h**.
 - permettre la configuration des plages horaires et de l'adresse email dans un menu dédié
 
 # Fonctionnement de l'application 
