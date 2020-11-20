@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Intent service = new Intent(this, MainService.class);
 
         ImageView status = findViewById(R.id.ImageDownloadStatus);
-        if (MainService.create){
+        if (MainService.active){
             status.setImageResource(R.drawable.power_on);
         }
         else{
