@@ -42,7 +42,7 @@ public class MainActivityTest {
         materialButton.perform(click());
 
         ViewInteraction imageView = onView(
-                allOf(withId(R.id.TV2), withContentDescription("Indique si le service à déjà été démarré"),
+                allOf(withId(R.id.ImageDownloadStatus), withContentDescription("Indique si le service à déjà été démarré"),
                         withParent(withParent(withId(R.id.nav_host_fragment))),
                         isDisplayed()));
         imageView.check(matches(isDisplayed()));

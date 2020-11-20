@@ -15,7 +15,7 @@
         android:layout_marginTop="44dp"
         android:text="@string/tat_du_t_l_chargement"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/TV2"
+        app:layout_constraintEnd_toStartOf="@+id/ImageDownloadStatus"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toEndOf="@+id/toggle" />
 
     <ImageView
-        android:id="@+id/TV2"
+        android:id="@+id/ImageDownloadStatus"
         android:layout_width="183dp"
         android:layout_height="104dp"
         android:layout_marginTop="8dp"
