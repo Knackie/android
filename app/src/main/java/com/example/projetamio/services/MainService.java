@@ -7,6 +7,8 @@ import android.os.IBinder;
 import java.util.Timer;
 
 public class MainService extends Service {
+
+    public static boolean create;
     private boolean downloading = false;
 //    private NetworkFragment networkFragment;
 
@@ -28,6 +30,12 @@ public class MainService extends Service {
         log.setContext(this);
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(log, 0, 30*1000);
+        MainService.create = true;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainService.create = false;
+    }
 }

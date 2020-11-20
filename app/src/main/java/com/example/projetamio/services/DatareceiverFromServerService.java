@@ -508,7 +508,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 publishProgress(DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS, 0);
                 if (stream != null) {
                     // Converts Stream to String with max length of 500.
-                    result = readStream(stream, 500);
+                    result = readStream(stream, 100000);
                 }
             } finally {
                 // Close Stream and disconnect HTTPS connection.
