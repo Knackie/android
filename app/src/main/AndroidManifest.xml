@@ -16,17 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetAMIO"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ListMoteActivity"></activity>
-
-        <service
-            android:name=".services.MainService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".services.DatareceiverFromServerService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name">
@@ -36,8 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activity.Settings"
+            android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,6 +35,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.ListMoteActivity" />
+
+        <service
+            android:name=".services.MainService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".services.DatareceiverFromServerService"
+            android:enabled="true"
+            android:exported="true" />
 
         <receiver
             android:name=".broadcast.MyBootBroadcastReceiver"

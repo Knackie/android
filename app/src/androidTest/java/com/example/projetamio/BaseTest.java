@@ -6,7 +6,7 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.example.projetamio.activity.Settings;
+import com.example.projetamio.activity.SettingsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -26,7 +26,7 @@ import static org.hamcrest.Matchers.allOf;
 public class BaseTest {
 
     @Rule
-    public ActivityTestRule<Settings> mActivityTestRule = new ActivityTestRule<>(Settings.class);
+    public ActivityTestRule<SettingsActivity> mActivityTestRule = new ActivityTestRule<>(SettingsActivity.class);
 
     @Test
     public void baseTest() {

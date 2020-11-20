@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here
         int id = item.getItemId();
-        Intent preferencesIntent = new Intent(this, Settings.class);
+        Intent preferencesIntent = new Intent(this, SettingsActivity.class);
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(preferencesIntent);

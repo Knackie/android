@@ -20,13 +20,11 @@ import java.util.List;
 public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder> {
     private List<DonneesLampe> mData;
     private LayoutInflater mInflater;
-    private Context mContext;
 
     // data is passed into the constructor
     LampAdapter(Context context, List<DonneesLampe> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
-        this.mContext = context;
     }
 
     // inflates the row layout from xml when needed
