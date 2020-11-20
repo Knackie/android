@@ -270,18 +270,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 int hoursBegin = Integer.parseInt(stringDebut[0]), minuteBegin = Integer.parseInt(stringDebut[1]);
                 int hoursEnd = Integer.parseInt(stringEnd[0]), minuteEnd = Integer.parseInt(stringEnd[1]);
                 int hnow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), mnow =  Calendar.getInstance().get(Calendar.MINUTE);
-                if (hoursBegin < hnow && hnow < hoursEnd){
-                    return true;
-                }
-                else if (hoursBegin == hnow){
-                    if (minuteBegin <= mnow){
-                        return true;
-                    }
-                }else if (hoursEnd == hnow){
-                    if (mnow <= minuteEnd){
-                        return true;
-                    }
-                }
+                return checkInHour(hoursBegin, minuteBegin, hoursEnd, minuteEnd, hnow, minuteEnd);
             }
         }
         return false;
@@ -302,18 +291,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 int hoursBegin = Integer.parseInt(stringDebut[0]), minuteBegin = Integer.parseInt(stringDebut[1]);
                 int hoursEnd = Integer.parseInt(stringEnd[0]), minuteEnd = Integer.parseInt(stringEnd[1]);
                 int hnow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), mnow =  Calendar.getInstance().get(Calendar.MINUTE);
-                if (hoursBegin < hnow && hnow < hoursEnd){
-                    return true;
-                }
-                else if (hoursBegin == hnow){
-                    if (minuteBegin <= mnow){
-                        return true;
-                    }
-                }else if (hoursEnd == hnow){
-                    if (mnow <= minuteEnd){
-                        return true;
-                    }
-                }
+                return checkInHour(hoursBegin, minuteBegin, hoursEnd, minuteEnd, hnow, minuteEnd);
             }
             else if (Parameters.isWeekEndDay(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))){
                 String[] stringDebut = settings.getString("hour_begin_email_weekend", "00:00").split(":");
@@ -321,17 +299,36 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 int hoursBegin = Integer.parseInt(stringDebut[0]), minuteBegin = Integer.parseInt(stringDebut[1]);
                 int hoursEnd = Integer.parseInt(stringEnd[0]), minuteEnd = Integer.parseInt(stringEnd[1]);
                 int hnow = Calendar.getInstance().get(Calendar.HOUR_OF_DAY), mnow =  Calendar.getInstance().get(Calendar.MINUTE);
-                if (hoursBegin < hnow && hnow < hoursEnd){
+                return checkInHour(hoursBegin, minuteBegin, hoursEnd, minuteEnd, hnow, minuteEnd);
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkInHour(int hoursBegin, int minuteBegin, int hoursEnd, int minuteEnd, int hnow, int mnow){
+        if (hoursBegin < hoursEnd) {
+            if (hoursBegin < hnow && hnow < hoursEnd) {
+                return true;
+            } else if (hoursBegin == hnow) {
+                if (minuteBegin <= mnow) {
                     return true;
                 }
-                else if (hoursBegin == hnow){
-                    if (minuteBegin <= mnow){
-                        return true;
-                    }
-                }else if (hoursEnd == hnow){
-                    if (mnow <= minuteEnd){
-                        return true;
-                    }
+            } else if (hoursEnd == hnow) {
+                if (mnow <= minuteEnd) {
+                    return true;
+                }
+            }
+        }
+        else {
+            if (hoursBegin < hnow || hnow < hoursEnd) {
+                return true;
+            } else if (hoursBegin == hnow) {
+                if (minuteBegin <= mnow) {
+                    return true;
+                }
+            } else if (hoursEnd == hnow) {
+                if (mnow <= minuteEnd) {
+                    return true;
                 }
             }
         }
