@@ -196,9 +196,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
             }
 
             if (this.isInEmailHour()){
-                Intent emailIntent = new Intent();
-                emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                emailIntent.setAction(Intent.ACTION_SEND);
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:"));
                 String PREFS_NAME = Parameters.PrefName;
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -206,7 +204,6 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, destEmail);
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_light_subject));
                 emailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_light_content));
-                emailIntent.setType("text/plain");
                 Intent chooserIntent = Intent.createChooser(emailIntent,"Envoyer à ");
                 chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(chooserIntent);
