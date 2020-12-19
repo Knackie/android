@@ -21,13 +21,24 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
     private List<DonneesLampe> mData;
     private LayoutInflater mInflater;
 
-    // data is passed into the constructor
+    /**
+     * Constructeur de la classe LampAdapter
+     * @param context Context d'appel des données
+     * @param data Les données à afficher
+     */
     LampAdapter(Context context, List<DonneesLampe> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
     // inflates the row layout from xml when needed
+
+    /**
+     * Fonction permettant d'intialiser la vue avec le bon fichier xmk
+     * @param parent
+     * @param viewType
+     * @return La liste des données sous forme LampViewHolder
+     */
     @Override
     public LampViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recycler_view_item, parent, false);
@@ -35,6 +46,12 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
     }
 
     // binds the data to the TextView in each row
+
+    /**
+     * Fonction permettant d'associer les données au différents emplacements prévu dans la vue
+     * @param holder Liste des données présentes
+     * @param position Numéro indiquant la position de la ligne en cours d'édition
+     */
     @Override
     public void onBindViewHolder(LampViewHolder holder, int position) {
         // Manage the view of the recyclerView
@@ -51,22 +68,32 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
         holder.mBattery.setText("Batterie = " + donneesLampe.getLastBattery() + "");
     }
 
-    // total number of rows
+    /**
+     * Fonction retournant le nombre de lignes
+     * @return le nombre de lignes
+     */
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
 
-    // stores and recycles views as they are scrolled off screen
+    // stores and recycles views as they are scrolled off scree
+
+    /**
+     * Permet de stocker les différents emplacements
+     */
     public class LampViewHolder extends RecyclerView.ViewHolder {
-        // Here is define some text and image for the recyclerView
         TextView myTextView;
         TextView mTemperature;
         TextView mHumidite;
         TextView mBattery;
         ImageView mLampeStatus;
 
+        /**
+         * Le constructeur permet de récupérer l'ensemble des éléments
+         * @param itemView La vue contenant les items à modifier
+         */
         LampViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.tvCapteur);
