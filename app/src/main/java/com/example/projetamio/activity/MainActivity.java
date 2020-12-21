@@ -20,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = Parameters.PrefName;
 
-    // Boolean telling us whether a download is in progress
+    /**
+     * Indique si le téléchargement est en cours
+     */
     private boolean downloading = false;
 
     @Override
@@ -29,13 +31,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * Fonction permettant la création du menu
+     * @param menu Menu que l'on souhaite afficher
+     * @return Indique si l'on a utilisé la fonction
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * Fonction permettant de définir les actions à effectuer lorsque l'on clique sur un bouton du menu
+     * @param item Element sur lequel l'utilisateur a appuyé
+     * @return la fonction onOptionsItemSelected du niveau supérieur
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here
@@ -49,12 +60,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Fonction appelée à la création de la vue
+     */
     @Override
     public void onStart() {
         super.onStart();
 
-        Intent service = new Intent(this, MainService.class);
+        //Gestion de l'affichage de l'état au démarrage de l'app
 
+        Intent service = new Intent(this, MainService.class);
         ImageView status = findViewById(R.id.imageDownloadStatus);
         if (MainService.active){
             status.setImageResource(R.drawable.power_on);
@@ -63,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
             status.setImageResource(R.drawable.power_off);
         }
 
-        // Button on management
+        // Gestion du bouton on/off
         Button on = findViewById(R.id.toggle);
         on.setOnClickListener(v -> {
-            if (downloading) {
+            if (!MainService.active) {
                 status.setImageResource(R.drawable.power_on);
                 startService(service);
             } else {
@@ -76,12 +91,16 @@ public class MainActivity extends AppCompatActivity {
             downloading = !downloading;
         });
 
+        // Gestion du bouton d'afffichage des Motes
+
         Button showMote = findViewById(R.id.viewMoteButton);
         showMote.setOnClickListener(v -> {
             Intent intentApp = new Intent(MainActivity.this,
                     ListMoteActivity.class);
             MainActivity.this.startActivity(intentApp);
         });
+
+        // Gestion de la case à cocher permettant le lancement de l'app au démarrage du téléphone
 
         CheckBox startAtBoot = findViewById(R.id.startAtBoot);
         startAtBoot.setOnCheckedChangeListener((buttonView, isChecked) -> {

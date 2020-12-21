@@ -8,8 +8,15 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.projetamio.R;
 
+/**
+ * Classe gérant l'écran des paramètres
+ */
 public class SettingsActivity extends AppCompatActivity {
 
+    /**
+     * Fonction appelée lors de la création de la vue
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +34,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Fonction
+     * @return
+     */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
+    /**
+     * Classe interne permettant la gestion des des préférences
+     */
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
