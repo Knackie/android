@@ -23,7 +23,7 @@ public class Parameters {
     /**
      * Adresse email par défaut de l'application
      */
-    public static final String DefaultEmail = "Projet.amio@gmail.com";
+    public static String DefaultEmail = "Projet.amio@gmail.com";
 
     /**
      * Jour de la semaine
