@@ -72,4 +72,6 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="pp_email_config">Enter Email</string>
     <string name="pp_email_config_dec">Enter default email</string>
+    <string name="pp_start_boot">Start at boot</string>
+    <string name="pp_start_at_boot_desc" >Start reload data in background with smartphone boot</string>
 </resources>
