@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
         android:key="@string/username"
         android:summary="@string/provide_username"
@@ -10,6 +11,11 @@
         android:selectAllOnFocus="true"
         android:summary="@string/pp_email_config_dec"
         android:title="@string/pp_email_config" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="startAtBoot"
+        android:title="@string/pp_start_boot"
+        app:summary="@string/pp_start_at_boot_desc" />
     <PreferenceCategory android:title="@string/pp_notification_group_title">
 
         <SwitchPreference
@@ -22,6 +28,7 @@
             android:defaultValue="19:00"
             android:hint="19:00"
             android:key="hour_begin_notification"
+            android:dependency="notification_switch_enable"
             android:summary="@string/pp_notification_begin_desc"
             android:title="@string/pp_notification_begin" />
         <EditTextPreference
@@ -30,6 +37,7 @@
             android:defaultValue="23:00"
             android:hint="23:00"
             android:key="hour_end_notification"
+            android:dependency="notification_switch_enable"
             android:summary="@string/pp_notification_end_desc"
             android:title="@string/pp_notification_end" />
     </PreferenceCategory>
@@ -45,6 +53,7 @@
             android:defaultValue="19:00"
             android:hint="19:00"
             android:key="hour_begin_email"
+            android:dependency="email_switch_enable"
             android:summary="@string/pp_email_begin_desc"
             android:title="@string/pp_email_begin" />
         <EditTextPreference
@@ -53,6 +62,7 @@
             android:defaultValue="23:00"
             android:hint="23:00"
             android:key="hour_end_email"
+            android:dependency="email_switch_enable"
             android:summary="@string/pp_email_end_desc"
             android:title="@string/pp_email_end" />
 
@@ -62,12 +72,14 @@
             android:key="hour_begin_email_weekend"
             android:summary="@string/pp_email_begin_desc_weekend"
             android:defaultValue="19:00"
+            android:dependency="email_switch_enable"
             android:title="@string/pp_email_begin_weekend" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="23:00"
             android:key="hour_end_email_weekend"
+            android:dependency="email_switch_enable"
             android:summary="@string/pp_email_end_desc_weekend"
             android:title="@string/pp_email_end_weekend" />
     </PreferenceCategory>
