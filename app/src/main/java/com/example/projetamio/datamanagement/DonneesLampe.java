@@ -66,6 +66,11 @@ public class DonneesLampe {
     private boolean etat = false;
 
     /**
+     * Variable contenant l'emplacement des motes
+     */
+    private HashMap<String, String> nomCommun;
+
+    /**
      * Constructeur de la classe
      * @param nom Permet de donner un nom à la Mote
      */
@@ -75,6 +80,16 @@ public class DonneesLampe {
         dataTemperature = new HashMap<>();
         dataBattery = new HashMap<>();
         dataHumidity = new HashMap<>();
+        nomCommun = new HashMap<>();
+        nomCommun.put("9.138", "Amphi Nord");
+        nomCommun.put("111.130", "Amphi Sud");
+        nomCommun.put("151.105", "Salle E1.22");
+        nomCommun.put("32.131", "Salle N0.3");
+        nomCommun.put("97.145", "Bureau 2.6");
+        nomCommun.put("120.99", "Bureau 2.7");
+        nomCommun.put("200.124", "Bureau 2.8");
+        nomCommun.put("53.105", "Bureau 2.9");
+
     }
 
     /**
@@ -134,6 +149,18 @@ public class DonneesLampe {
      */
     public String getNom() {
         return nom;
+    }
+
+    /**
+     * Fonction permettant de récupérer l'emplacement de la mote si connu ou son nom
+     * @return l'emplacement de la mote ou son nom si emplacement inconnu
+     */
+    public String getEmplaceemnt(){
+        String emplacement = this.nomCommun.get(this.getNom());
+        if (emplacement != null){
+            return emplacement;
+        }
+        return this.getNom();
     }
 
     /**
