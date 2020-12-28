@@ -13,7 +13,7 @@ public class Parameters {
     /**
      * URL du serveur contenant les données
      */
-    public static final String URLData =  "http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/temperature-light2-light1-battery_indicator-humidity/last";
+    public static final String URLData =  "http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/temperature-light1-battery_indicator-humidity/last";
 
     /**
      * Nom des préférences de l'application
