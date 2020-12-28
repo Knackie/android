@@ -19,6 +19,10 @@ public class ListMoteActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    /**
+     * Fonction qui est appelée à la création de la vue
+     * @param savedInstanceState Permet de récupérer l'état de la précédente vue
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,11 @@ public class ListMoteActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Permet d'effectuer une action lorsque l'on clique sur un item
+     * @param item item sur lequel on a appuyé
+     * @return Retourne Vrai si l'évènement a été utilisé
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         onBackPressed();

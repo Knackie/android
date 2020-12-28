@@ -11,13 +11,24 @@ import com.example.projetamio.services.DatareceiverFromServerService;
 
 import static com.example.projetamio.activity.MainActivity.PREFS_NAME;
 
+
+/**
+ * Class permettant la gestion du démarrage de l'application lorsque
+ */
 public class MyBootBroadcastReceiver extends BroadcastReceiver {
 
+    /**
+     * Constructeur de la classe
+     */
     public MyBootBroadcastReceiver(){
         super();
-        Log.d(this.getClass().getName(), "Controleur initialisé");
     }
 
+    /**
+     * Fonction appelée lorsque le Boradcast est appelée
+     * @param context Context d'appel de la méthode
+     * @param intent Intent Intent appelant la fonction
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("MyBootBroadcastReceiver", "Le broadcast est bien arrivé");

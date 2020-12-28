@@ -4,6 +4,12 @@
         android:key="@string/username"
         android:summary="@string/provide_username"
         android:title="@string/yourname" />
+    <EditTextPreference
+        android:id="@+id/pp_email_config"
+        android:key="emailString"
+        android:selectAllOnFocus="true"
+        android:summary="@string/pp_email_config_dec"
+        android:title="@string/pp_email_config" />
     <PreferenceCategory android:title="@string/pp_notification_group_title">
 
         <SwitchPreference

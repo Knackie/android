@@ -13,7 +13,9 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -39,33 +41,68 @@ import java.net.URL;
 import java.nio.channels.InterruptedByTimeoutException;
 import java.util.Calendar;
 
+/**
+ * Classe récupérant les données de l'API et les traitants
+ */
 public class DatareceiverFromServerService extends Service implements DownloadCallback {
 
+    /**
+     * Nom des préférences utilisés dans l'application
+     */
     private static final String PREFS_NAME = Parameters.PrefName;
+
+    /**
+     * Indique si le téléchargement est en cours ou non
+     */
     private boolean downloading;
-//    private NetworkFragment networkFragment;
+
+    /**
+     * Instance de la classe ListLamp
+     */
     private ListLampe listLampe;
 
+    /**
+     * Instance de la classe DatareceiverFromServerService
+     */
     private static DatareceiverFromServerService instance = null;
+
+    /**
+     * Instance de la classe DownloadTask
+     */
     private DownloadTask downloadTask;
+
+    /**
+     * Instance de la classe à utiliser pour trier les données
+     */
     private DownloadCallback<String> callback;
 
+    /**
+     * Constructeur de la classe
+     */
     public DatareceiverFromServerService(){
         super();
         this.listLampe = ListLampe.getInstance();
         callback = (DownloadCallback<String>) this;
     }
 
+    /**
+     * Fonction appelée lorsque la vue est bind par l'application
+     * @param intent Intent ayant réalisé le callback
+     * @return ???
+     */
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
 
     /**
-     * Function create manually
+     * Fonction appelée à la création du service et
+     * permettant son execution
      */
     @Override
     public void onCreate()  {
+
+        // Lancement en arrière plan différent suivant les versions d'Android
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             startMyOwnForeground();
         else
@@ -74,6 +111,9 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         this.stopSelf();
     }
 
+    /**
+     * Fonction permettant le lancement en arrière plan sur les dernières versions d'Android
+     */
     private void startMyOwnForeground(){
         String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
         String channelName = "My Background Service";
@@ -95,7 +135,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
     }
 
     /**
-     * Start non-blocking execution of DownloadTask.
+     * Fonction permettant un lancement non bloquant de l'application
      */
     public void startDownload() {
         downloadTask = new DownloadTask(callback);
@@ -105,27 +145,28 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
 
 
     /**
-     * {
-     *       "timestamp": 1603588279000,
-     *       "label": "temperature",
-     *       "value": -32.76,
-     *       "mote": "53.105"
-     *     }
-     * @param result
+     * Fonction permettant le traitement des données lorsque celle-ci
+     * @param result Données brutes récupérées de l'application
      */
     @Override
     public void updateFromDownload(Object result){
         boolean changement = false, res;
+
+        // Verification de l'instance
+
         if (result instanceof String) {
             String resultString = (String)result;
             Log.d(this.getClass().getName(), resultString);
-            if (resultString.contains("HTTP error code:") || resultString.contains("no protocol:")) {
-                CharSequence text = "Erreur lors du chargement des données";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this.getBaseContext(), text, duration);
-                toast.show();
+
+            // Vérification d'une erreur et Toast si le cas
+
+            if (resultString.contains("HTTP error code:") || resultString.contains("no protocol:") || resultString.contains("failed to connect")) {
+                toastApp();
             }
             else{
+
+                // Traitement des données
+
                 JsonReader reader = null;
                 try {
                     reader = new JsonReader(new InputStreamReader(new ByteArrayInputStream(resultString.getBytes()), "UTF-8"));
@@ -169,8 +210,10 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                     reader.endObject();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
+                    toastApp("Erreur lors du traitement des données");
                 } catch (IOException e) {
                     e.printStackTrace();
+                    toastApp("Erreur lors du traitement des données");
                 }
                 try {
 
@@ -181,10 +224,14 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                         Log.d(this.getClass().getName(), "Chargement réussi");
                     } catch (IOException e) {
                         e.printStackTrace();
+                        toastApp("Erreur lors du traitement des données");
                     }
                 }
             }
         }
+
+        // Lancement des notifications et email si un changement de luminosité est détecté
+
         if (changement){
             Log.d(this.getClass().getName(), "Changement detecté");
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -252,6 +299,10 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
 
     }
 
+    /**
+     * Fonction permettant de vérifier si l'heure est dans les heures d'envoie des notification push
+     * @return TRUE si l'heure est celle où l'on doit envoyer des notification, ELSE sinon
+     */
     private boolean isNotificationHour() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -273,6 +324,10 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         return false;
     }
 
+    /**
+     * Fonction permettant de vérifier si l'heure est dans les heures d'envoie des notification par email
+     * @return TRUE si l'heure est celle où l'on doit envoyer des notification, ELSE sinon
+     */
     private boolean isInEmailHour() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -302,6 +357,10 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         return false;
     }
 
+    /**
+     * Fonction permettant de vérifier la présence dans un interval d'heure
+     * @return TRUE si l'on est dans l'intervak, ELSE sinon
+     */
     private Boolean checkInHour(int hoursBegin, int minuteBegin, int hoursEnd, int minuteEnd, int hnow, int mnow){
         if (hoursBegin < hoursEnd) {
             if (hoursBegin < hnow && hnow < hoursEnd) {
@@ -332,6 +391,10 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         return false;
     }
 
+    /**
+     * Fonction permettant de vérifier la présence d'une connexion au réseau
+     * @return La connexion disponible
+     */
     @Override
     public NetworkInfo getActiveNetworkInfo() {
         ConnectivityManager connectivityManager =
@@ -340,15 +403,17 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         return networkInfo;
     }
 
+    /**
+     * Fonction permettant de suivre l'avancé du téléchargement
+     * @param progressCode must be one of the constants defined in DownloadCallback.Progress.
+     * @param percentComplete must be 0-100.
+     */
     @Override
     public void onProgressUpdate(int progressCode, int percentComplete) {
         switch(progressCode) {
             // You can add UI behavior for progress updates here.
             case DownloadCallback.Progress.ERROR:
-                /**CharSequence text = "Erreur lors du chargement des données";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(this.getBaseContext(), text, duration);
-                toast.show();*/
+                toastApp();
                 Log.e(this.getClass().getName(), "Erreur lors du téléchargement");
                 break;
             case DownloadCallback.Progress.CONNECT_SUCCESS:
@@ -362,14 +427,17 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         }
     }
 
+    /**
+     * Fonction appelé lors de la fin du téléchargement
+     */
     @Override
     public void finishDownloading() {
         downloading = false;
         this.cancelDownload();
-        Log.d(this.getClass().getName(), "Données : " + this.listLampe.toString());
     }
+
     /**
-     * Cancel (and interrupt if necessary) any ongoing DownloadTask execution.
+     * Annule toute les execution en cours de DonloadTask
      */
     public void cancelDownload() {
         if (downloadTask != null) {
@@ -379,6 +447,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
 
     /**
      * Implementation of AsyncTask designed to fetch data from the network.
+     * Implementation d'AsyncTask pour trouver les données sur le réseau
      */
     private static class DownloadTask extends AsyncTask<String, Integer, DownloadTask.Result> {
 
@@ -536,10 +605,36 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
         }
     }
 
+    /**
+     * Class privé permettant de traiter les informations brutes des motes
+     */
     private class TempInfoMote{
         public String name;
         public double value;
         public String label;
         public long timestamp;
+    }
+
+    /**$
+     * Méthode peremettant d'envoyer un toast avec un message prédéfinie
+     */
+    private void toastApp() {
+        toastApp("Erreur lors du chargement des données");
+    }
+
+    /**
+     * Fonction permettant d'envoyer un toast avec un message donné
+     * @param text Message à mettre dans le toast
+     */
+    private void toastApp(String text){
+        final Context MyContext = this;
+
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast1 = Toast.makeText(MyContext, text, Toast.LENGTH_LONG);
+                toast1.show();
+            }
+        });
     }
 }

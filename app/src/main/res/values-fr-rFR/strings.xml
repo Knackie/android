@@ -58,4 +58,6 @@
     <string name="attachment_summary_on">Téélchargement automatique des pièces jointes pour les nouveaux emails</string>
     <string name="attachment_summary_off">Télécharger seulement les pièces jointes lorsque cela est explicité par l\'utilisateur</string>
     <string name="pp_email_begin_weekend">Heure de début d\'envoi des alertes par email le weekend</string>
+    <string name="pp_email_config">Entrez votre email</string>
+    <string name="pp_email_config_dec">Email par défaut pour l\'envoi d\'email</string>
 </resources>
