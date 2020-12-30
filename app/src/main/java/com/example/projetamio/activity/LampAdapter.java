@@ -4,16 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetamio.R;
 import com.example.projetamio.datamanagement.DonneesLampe;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -57,15 +54,18 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
         // Manage the view of the recyclerView
         DonneesLampe donneesLampe = mData.get(position);
         holder.myTextView.setText(donneesLampe.getEmplaceemnt());
-        holder.mTemperature.setText("Température = " + donneesLampe.getLastTemperature() + "");
+        String labelTemperature = mInflater.getContext().getString(R.string.temperature);
+        holder.mTemperature.setText(String.format("%s = %s °C", labelTemperature, donneesLampe.getLastTemperature()));
         if (donneesLampe.isAllume()) {
             // Check the state of lamp, and show image with state
             holder.mLampeStatus.setImageResource(R.drawable.light_on);
         } else {
             holder.mLampeStatus.setImageResource(R.drawable.light_off);
         }
-        holder.mHumidite.setText("Humidité = " + donneesLampe.getLastHumidity() + "");
-        holder.mBattery.setText("Batterie = " + donneesLampe.getLastBattery() + "");
+        String labelHumidite = mInflater.getContext().getString(R.string.humidite);
+        holder.mHumidite.setText(String.format("%s = %s %%", labelHumidite, donneesLampe.getLastHumidity()));
+        String labelBatterie = mInflater.getContext().getString(R.string.batterylabel);
+        holder.mBattery.setText(String.format("%s = %s V", labelBatterie, donneesLampe.getLastBattery()));
     }
 
     /**

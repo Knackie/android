@@ -1,11 +1,7 @@
 package com.example.projetamio.datamanagement;
 
-import android.content.Intent;
 import android.util.Log;
 
-import com.example.projetamio.services.NotifyChoiceService;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DonneesLampe {
@@ -130,7 +126,7 @@ public class DonneesLampe {
                 }
                 this.lastLight = timetamps;
                 break;
-            case "battery_indicator":
+            case "battery_voltage":
                 this.dataBattery.put(timetamps, valeur);
                 this.lastBattery = timetamps;
                 return true;

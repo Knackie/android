@@ -74,4 +74,7 @@
     <string name="pp_email_config_dec">Enter default email</string>
     <string name="pp_start_boot">Start at boot</string>
     <string name="pp_start_at_boot_desc" >Start reload data in background with smartphone boot</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidite">Humidity</string>
+    <string name="batterylabel">Battery</string>
 </resources>

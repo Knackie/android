@@ -47,7 +47,6 @@ public class SettingActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         ViewInteraction overflowMenuButton = onView(
                 allOf(withContentDescription("More options"),
                         childAtPosition(
