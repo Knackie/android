@@ -62,4 +62,7 @@
     <string name="pp_email_config_dec">Email par défaut pour l\'envoi d\'email</string>
     <string name="pp_start_boot">Lancer au démarrage</string>
     <string name="pp_start_at_boot_desc">Lancement du chargement des données en arrière plan avec le démarrage du téléphone</string>
+    <string name="temperature">Température</string>
+    <string name="humidite">Humidité</string>
+    <string name="batterylabel">Batterie</string>
 </resources>
