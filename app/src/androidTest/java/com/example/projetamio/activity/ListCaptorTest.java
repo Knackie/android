@@ -58,14 +58,11 @@ public class ListCaptorTest {
                                 2),
                         isDisplayed()));
         materialButton2.perform(click());
-
-        ViewInteraction viewGroup = onView(
-                allOf(withId(R.id.linearLayout),
-                        withParent(allOf(withId(R.id.allmoterecyclerview),
-                                withParent(withId(R.id.allmoteconstraintlayout)))),
-                        isDisplayed()));
-        viewGroup.check(matches(isDisplayed()));
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ViewInteraction textView0 = onView(
                 allOf(withId(R.id.tvCapteur), withText("Bureau 2.6"),
                         withParent(allOf(withId(R.id.linearLayout),
