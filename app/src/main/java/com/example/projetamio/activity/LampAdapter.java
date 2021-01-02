@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetamio.R;
 import com.example.projetamio.datamanagement.DonneesLampe;
 
+import java.text.DateFormat;
 import java.util.List;
 
 public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder> {
@@ -65,7 +66,9 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
         String labelHumidite = mInflater.getContext().getString(R.string.humidite);
         holder.mHumidite.setText(String.format("%s = %s %%", labelHumidite, donneesLampe.getLastHumidity()));
         String labelBatterie = mInflater.getContext().getString(R.string.batterylabel);
-        holder.mBattery.setText(String.format("%s = %s V", labelBatterie, donneesLampe.getLastBattery()));
+        holder.mBattery.setText(String.format("%s = %s %%", labelBatterie, donneesLampe.getLastBattery()));
+        String labelLastUpdate = mInflater.getContext().getString(R.string.lastupdate);
+        holder.mLastUpdate.setText(String.format("%s : %s", labelLastUpdate, DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(donneesLampe.getLastUpdate())));
     }
 
     /**
@@ -88,6 +91,7 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
         TextView mTemperature;
         TextView mHumidite;
         TextView mBattery;
+        TextView mLastUpdate;
         ImageView mLampeStatus;
 
         /**
@@ -101,6 +105,7 @@ public class LampAdapter extends RecyclerView.Adapter<LampAdapter.LampViewHolder
             mLampeStatus = itemView.findViewById(R.id.tvLamp);
             mHumidite = itemView.findViewById(R.id.tvHumidity);
             mBattery = itemView.findViewById(R.id.tvBattery);
+            mLastUpdate = itemView.findViewById(R.id.tvLastUpdate);
         }
     }
 }

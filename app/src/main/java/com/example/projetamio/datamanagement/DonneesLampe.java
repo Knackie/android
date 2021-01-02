@@ -2,6 +2,7 @@ package com.example.projetamio.datamanagement;
 
 import android.util.Log;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public class DonneesLampe {
@@ -126,7 +127,7 @@ public class DonneesLampe {
                 }
                 this.lastLight = timetamps;
                 break;
-            case "battery_voltage":
+            case "battery_indicator":
                 this.dataBattery.put(timetamps, valeur);
                 this.lastBattery = timetamps;
                 return true;
@@ -189,6 +190,14 @@ public class DonneesLampe {
      */
     public Double getLastBattery() {
         return dataBattery.get(lastBattery);
+    }
+
+    /**
+     * Fonction permettant de récupérer le moment de l'envoie des dernière données des capteurs par l'API
+     * @return Date et heure des données récupérées par l'API
+     */
+    public Date getLastUpdate(){
+        return new Date(this.lastLight);
     }
 
 

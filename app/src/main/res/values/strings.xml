@@ -77,4 +77,5 @@
     <string name="temperature">Temperature</string>
     <string name="humidite">Humidity</string>
     <string name="batterylabel">Battery</string>
+    <string name="lastupdate">Last update</string>
 </resources>
