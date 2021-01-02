@@ -210,6 +210,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                         }
                     }
                     reader.endObject();
+                    DatareceiverFromServerService.lastDateDownload = new Date();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                     toastApp("Erreur lors du traitement des données");
@@ -231,7 +232,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 }
             }
         }
-        DatareceiverFromServerService.lastDateDownload = new Date();
+
 
         // Lancement des notifications et email si un changement de luminosité est détecté
 
