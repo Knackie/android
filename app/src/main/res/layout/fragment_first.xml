@@ -53,4 +53,25 @@
         app:layout_constraintStart_toEndOf="@+id/TV1"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/labelLastUpdateMA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:text="@string/lastupdate"
+        app:layout_constraintEnd_toStartOf="@+id/dataLastUpdateMA"
+        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TV1" />
+
+    <TextView
+        android:id="@+id/dataLastUpdateMA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="88dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageDownloadStatus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

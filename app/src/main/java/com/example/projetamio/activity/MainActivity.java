@@ -3,18 +3,23 @@ package com.example.projetamio.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.projetamio.services.MainService;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.projetamio.R;
 import com.example.projetamio.config.Parameters;
+import com.example.projetamio.services.DatareceiverFromServerService;
+import com.example.projetamio.services.MainService;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +29,33 @@ public class MainActivity extends AppCompatActivity {
      * Indique si le téléchargement est en cours
      */
     private boolean downloading = false;
+
+    /**
+     * Variable utilisée pour actualiser la date de dernière mise à jour réussite
+     */
+    private Handler handler = new Handler();
+
+
+    private Runnable run = new Runnable() {
+        @Override
+        public void run() {
+            TextView lastDate = findViewById(R.id.dataLastUpdateMA);
+            Date lastDownald = DatareceiverFromServerService.getLastDateDownload();
+            // Gestion de la date de derinère mise à jour
+
+            if (lastDownald != null ){
+                if (lastDate != null) {
+                    lastDate.setText(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(lastDownald));
+                }
+            }
+            else{
+                if (lastDate != null) {
+                    lastDate.setText(getString(R.string.newer));
+                }
+            }
+            handler.postDelayed(this, 1000);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +131,13 @@ public class MainActivity extends AppCompatActivity {
                     ListMoteActivity.class);
             MainActivity.this.startActivity(intentApp);
         });
+
+
+        handler.post(run);
+
+
+
+
 
         // Gestion de la case à cocher permettant le lancement de l'app au démarrage du téléphone
 

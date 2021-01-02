@@ -25,10 +25,10 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.projetamio.R;
+import com.example.projetamio.config.Parameters;
 import com.example.projetamio.datamanagement.DonneesLampe;
 import com.example.projetamio.datamanagement.ListLampe;
-import com.example.projetamio.config.Parameters;
-import com.example.projetamio.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -38,8 +38,8 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.channels.InterruptedByTimeoutException;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Classe récupérant les données de l'API et les traitants
@@ -50,6 +50,8 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
      * Nom des préférences utilisés dans l'application
      */
     private static final String PREFS_NAME = Parameters.PrefName;
+
+    private static Date lastDateDownload;
 
     /**
      * Indique si le téléchargement est en cours ou non
@@ -229,6 +231,7 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 }
             }
         }
+        DatareceiverFromServerService.lastDateDownload = new Date();
 
         // Lancement des notifications et email si un changement de luminosité est détecté
 
@@ -636,5 +639,9 @@ public class DatareceiverFromServerService extends Service implements DownloadCa
                 toast1.show();
             }
         });
+    }
+
+    public static Date getLastDateDownload(){
+        return lastDateDownload;
     }
 }
