@@ -85,11 +85,11 @@ public class ListCaptorTest {
         textView2.check(matches(withText("Humidity = 25.81 %")));
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.tvBattery), withText("Battery = 2.55 V"),
+                allOf(withId(R.id.tvBattery), withText("Battery = 50.0 %"),
                         withParent(allOf(withId(R.id.linearLayout),
                                 withParent(withId(R.id.allmoterecyclerview)))),
                         isDisplayed()));
-        textView3.check(matches(withText("Battery = 2.55 V")));
+        textView3.check(matches(withText("Battery = 50.0 %")));
 
         ViewInteraction textView9 = onView(
                 allOf(withId(R.id.tvCapteur), withText("Bureau 2.9"),
@@ -113,11 +113,11 @@ public class ListCaptorTest {
         textView11.check(matches(withText("Humidity = 32.45 %")));
 
         ViewInteraction textView12 = onView(
-                allOf(withId(R.id.tvBattery), withText("Battery = 2.58 V"),
+                allOf(withId(R.id.tvBattery), withText("Battery = 65.0 %"),
                         withParent(allOf(withId(R.id.linearLayout),
                                 withParent(withId(R.id.allmoterecyclerview)))),
                         isDisplayed()));
-        textView12.check(matches(withText("Battery = 2.58 V")));
+        textView12.check(matches(withText("Battery = 65.0 %")));
 
         ViewInteraction textView4 = onView(
                 allOf(withId(R.id.tvCapteur), withText("Amphi Sud"),
@@ -141,11 +141,11 @@ public class ListCaptorTest {
         textView6.check(matches(withText("Humidity = 46.22 %")));
 
         ViewInteraction textView7 = onView(
-                allOf(withId(R.id.tvBattery), withText("Battery = 2.65 V"),
+                allOf(withId(R.id.tvBattery), withText("Battery = 30.0 %"),
                         withParent(allOf(withId(R.id.linearLayout),
                                 withParent(withId(R.id.allmoterecyclerview)))),
                         isDisplayed()));
-        textView7.check(matches(withText("Battery = 2.65 V")));
+        textView7.check(matches(withText("Battery = 30.0 %")));
     }
 
     private static Matcher<View> childAtPosition(
