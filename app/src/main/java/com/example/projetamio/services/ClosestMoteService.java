@@ -19,77 +19,155 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Service principal de l'application lançant la récupération périodique des données
+ * Service permettant de récupérer les informations GPS de l'application
  */
 public class ClosestMoteService extends Service {
 
-    private static final String TAG = "BOOMBOOMTESTGPS";
+    /**
+     * Tag utilisé pour les logs
+     */
+    private static final String TAG = ClosestMoteService.class.getName();
+
+    /**
+     * Emplacement actuel
+     */
     private LocationManager mLocationManager = null;
+
+    /**
+     * Interval auquel la localisation est actualisée
+     */
     private static final int LOCATION_INTERVAL = 1000;
+
+    /**
+     * Distance de localisation en Hexadécimal
+     */
     private static final float LOCATION_DISTANCE = 10f;
-    private static String ClosestMote;
-    private static String ClosestMoteSimple;
+
+    /**
+     * Mote la plus proche avec son numéro de mote
+     */
+    private static String closestMote;
+
+    /**
+     * Mote la plus proche avec son nom simplifié
+     */
+    private static String closestMoteSimple;
+
+    /**
+     * Gestionnaire de fichiers extérieurs au projet
+     */
     private AssetManager assetManager;
+
+    /**
+     * Input stream contenant les informations sur les motes
+     */
     private InputStream is;
+
+    /**
+     * Buffer contenant les informations extrais du CSV des motes
+     */
     private BufferedReader br = null;
+
+    /**
+     * Sauvegarde des emplacements récupérées du fichier CSV
+     */
     private ArrayList<Emplacement> listEmp;
 
+    /**
+     * Classe appelée lors d'un évènement sur la localisation
+     */
     private class LocationListener implements android.location.LocationListener {
 
-
+        /**
+         * Emplacement actuel
+         */
         Location mLastLocation;
 
-
+        /**
+         * Constructeur de la méthode
+         * @param provider Nom donné à la localisation actuelle
+         */
         public LocationListener(String provider) {
             mLastLocation = new Location(provider);
             mLastLocation.set(mLastLocation);
 
         }
 
+        /**
+         * Méthode éxecutée lorsqu'un changement de localisation ce passe
+         * @param location Données de localisation
+         */
         @Override
         public void onLocationChanged(Location location) {
             executeCalcul(location);
 
         }
 
+        /**
+         * Méthode appelé lors d'un changement de statu du GPS
+         * @param provider Nom de la localisation
+         * @param status Nouveau statu
+         * @param extras Données supplémentaires
+         */
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
             // Do nothing because it's useless on our project now
         }
 
+        /**
+         * Méthode appelée lorsque la localisation est désactivée
+         * @param provider Nom de la localisation
+         */
         @Override
         public void onProviderDisabled(String provider) {
             // Do nothing because it's useless on our project now
         }
-
+        /**
+         * Méthode appelée lorsque la localisation est activée
+         * @param provider Nom de la localisation
+         */
         @Override
         public void onProviderEnabled(String provider) {
             // Do nothing because it's useless on our project now
         }
 
+        /**
+         * Fonction calculant la distance entre la position actuelle et celle des motes
+         * @param location Localisation actuelle
+         */
         private void executeCalcul(Location location){
-            float distance_min = -1, distance;
-            String moteName = "", nomSimple = "";
-            float[] res = new float[1];;
+            float distanceMin = -1;
+            float distance;
+            String moteName = "";
+            String nomSimple = "";
+            float[] res = new float[1];
             for (Emplacement e: listEmp) {
-                Location.distanceBetween(location.getLatitude(), location.getLongitude(), e.Latutude, e.Longitude, res );
+                Location.distanceBetween(location.getLatitude(), location.getLongitude(), e.latitude, e.longitude, res );
                 distance =  res[0];
-                if (distance < distance_min || distance_min == -1){
-                    distance_min = distance;
+                if (distance < distanceMin || distanceMin == -1){
+                    distanceMin = distance;
                     moteName = e.nomMote;
                     nomSimple = e.nomMoteSimple;
                 }
             }
-            ClosestMoteService.ClosestMote = moteName;
-            ClosestMoteService.ClosestMoteSimple = nomSimple;
+            ClosestMoteService.setClosestMote(moteName);
+            ClosestMoteService.setClosestMoteSimple(nomSimple);
         }
     }
 
+    /**
+     * Création des listener se basant sur la localisation GPS ou par réseau
+     */
     LocationListener[] mLocationListeners = new LocationListener[]{
             new LocationListener(LocationManager.GPS_PROVIDER),
             new LocationListener(LocationManager.NETWORK_PROVIDER)
     };
 
+    /**
+     * Méthode appelée lorsque le service est bind
+     * @param arg0 Intent d'appel
+     * @return ???
+     */
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
@@ -97,11 +175,14 @@ public class ClosestMoteService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e(TAG, "onStartCommand");
         super.onStartCommand(intent, flags, startId);
         return START_STICKY;
     }
 
+    /**
+     * Méthode appelée lorsque le service est crée et permettant d'extraire les données issues deu
+     * fichier CSV fourni
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -113,27 +194,27 @@ public class ClosestMoteService extends Service {
         }
         br = new BufferedReader(new InputStreamReader(is));
         listEmp = new ArrayList<>();
-        if (br != null) {
-            String numMote;
-            Emplacement emp;
-            try {
-                CSVReader reader = new CSVReader(br);
+
+        // Extraction des données du CSV
+        String numMote;
+        Emplacement emp;
+        try {
+            try(CSVReader reader = new CSVReader(br)) {
                 String[] nextLine;
                 while ((nextLine = reader.readNext()) != null) {
                     // nextLine[] is an array of values from the line
                     emp = new Emplacement();
-                    emp.Longitude = Float.valueOf(nextLine[1]).floatValue();
-                    emp.Latutude = Float.valueOf(nextLine[0]).floatValue();
+                    emp.longitude = Float.parseFloat(nextLine[1]);
+                    emp.latitude = Float.parseFloat(nextLine[0]);
                     numMote = nextLine[2];
                     emp.nomMote = numMote;
                     emp.nomMoteSimple = nextLine[3];
                     listEmp.add(emp);
                 }
-            } catch (IOException e) {
-
             }
+        } catch (IOException e) {
+            Log.e(TAG, "Extraction impossible des données du XML");
         }
-        Log.e(TAG, "onCreate");
         initializeLocationManager();
         try {
             mLocationManager.requestLocationUpdates(
@@ -157,9 +238,11 @@ public class ClosestMoteService extends Service {
         }
     }
 
+    /**
+     * Méthode appelée lorsque le service est arrêté
+     */
     @Override
     public void onDestroy() {
-        Log.e(TAG, "onDestroy");
         super.onDestroy();
         if (mLocationManager != null) {
             for (int i = 0; i < mLocationListeners.length; i++) {
@@ -172,31 +255,73 @@ public class ClosestMoteService extends Service {
         }
     }
 
+    /**
+     * Initialise la localisation en définissant le context
+     */
     private void initializeLocationManager() {
-        Log.e(TAG, "initializeLocationManager");
         if (mLocationManager == null) {
             mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         }
     }
-    private class Emplacement {
-        public String nomMote;
-        public String nomMoteSimple;
-        public Float Longitude;
-        public Float Latutude;
 
+    /**
+     * Classe permettant de stocker facilement les données extraies des fichiers CSV
+     */
+    private class Emplacement {
+        /**
+         * Peremt de conserver le nom de la mote
+         */
+        public String nomMote;
+
+        /**
+         * Permet de conserver la salle de la mote
+         */
+        public String nomMoteSimple;
+
+        /**
+         * Permet de conserver la Longitude de la mote
+         */
+        public Float longitude;
+
+        /**
+         * Permet de conserver la Latitude de la mote
+         */
+        public Float latitude;
+
+        /**
+         * Méthode permettant d'afficher les données contenues dans la classe
+         * @return Les données de la classe sous forme de string
+         */
         @Override
         public String toString() {
             return "Emplacement{" +
-                    "Longitude='" + Longitude + '\'' +
-                    ", Latutude='" + Latutude + '\'' +
+                    "Longitude='" + longitude + '\'' +
+                    ", Latutude='" + latitude + '\'' +
                     '}';
         }
     }
 
-    public static String getClosestMote(){
-        return ClosestMoteService.ClosestMote;
+    /**
+     * Méthode permettant de récupérer la mote la plus proche
+     * @return Numéro de la mote la plus proche
+     */
+    public static synchronized String getClosestMote(){
+        return ClosestMoteService.closestMote;
     }
-    public static String getClosestMoteNomSimple(){
-        return ClosestMoteService.ClosestMoteSimple;
+
+    /**
+     * Méthode permettant de récupérer l'emplacement de la mote la plus proche
+     * @return Emplacement de la mote la plus proche
+     */
+    public static synchronized String getClosestMoteNomSimple(){
+        return ClosestMoteService.closestMoteSimple;
+    }
+
+    private static synchronized void setClosestMote(String nomMote){
+        closestMote = nomMote;
+    }
+
+    private static synchronized void setClosestMoteSimple(String nomMote){
+        closestMoteSimple = nomMote;
     }
 }
