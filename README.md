@@ -88,5 +88,5 @@ L'application dispose d'un système de traduction, ce qui permet d'avoir l'appli
 L'application dispose de test fonctionnel qu'il est possible de lancer via la commande :
 ./gradlew connectedAndroidTest 
 
-Ils sont lancés automatiquement à chaque mise en place de nouveauté de versions sur la branche master de notre dépôt Github : [https://github.com/Knackie/android](https://github.com/Knackie/android)  
+Ils sont lancés automatiquement à chaque mise en place de nouveauté de versions sur la branche master de notre dépôt Github : [https://github.com/Knackie/android](https://github.com/Knackie/android).  
 La génération de l'APK est aussi automatique lorsqu'un nouveau tag est envoyé sur Github, avec la création des asserts associés.
