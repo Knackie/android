@@ -74,8 +74,9 @@ Celui redirige vers une liste de capteurs avec leurs états.
 </p>
 
 Par exemple, sur ce capteur, nous pouvons voir plusieurs informations :
-- Le nom du capteur, ici Bureau 2.6
-- La température, ici -39.6°C (température idéal pour concerver le vaccin du covid-19)
-- L'humidité, qui est de 25.81% sur l'exemple
-- La batterie du capteur, de 1% dans l'exemple
-- Et la dernière date de reception d'une donnée du capteur, qui est du 18 Décembre 2020 à 19:44 d'après l'image
+- Le nom du capteur, ici Bureau 2.6,
+- La température, ici -39.6°C (température idéal pour concerver le vaccin du covid-19),
+- L'humidité, qui est de 25.81% sur l'exemple,
+- La batterie du capteur, de 1% dans l'exemple,
+- Et la dernière date de reception d'une donnée du capteur, qui est du 18 Décembre 2020 à 19:44 d'après l'image,
+- La luminosité est représentée par l'icone de lampe, qui s'allume en jaune au dessus d'un certain seuil.
