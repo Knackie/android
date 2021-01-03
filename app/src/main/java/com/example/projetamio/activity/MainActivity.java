@@ -1,13 +1,11 @@
 package com.example.projetamio.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             TextView lastDate = findViewById(R.id.valueMoteSoon);
             lastDate.setText(ClosestMoteService.getClosestMoteNomSimple());
-            handler.postDelayed(this, 500);
+            handler.postDelayed(this, 1000);
         }
     };
 
@@ -160,5 +158,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         stopService(this.servicelocatlisation);
+        handler.removeCallbacks(run);
+        handler.removeCallbacks(updateLocationMote);
     }
 }
