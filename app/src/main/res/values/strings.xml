@@ -49,7 +49,7 @@
     <string name="pp_email_begin_weekend">Hour where notification mechanism send email</string>
     <string name="pp_email_end_desc_weekend">Hour where notification mechanism stop send email</string>
     <string name="pp_email_end_weekend">Hour where notification mechanism stop send email</string>
-    <string name="état" >state</string>
+    <string name="état" >State</string>
     <string name="on_off">On/Off</string>
     <string name="capteurs">Captors</string>
     <string name="tat_du_t_l_chargement">Download state</string>
@@ -78,6 +78,6 @@
     <string name="humidite">Humidity</string>
     <string name="batterylabel">Battery</string>
     <string name="lastupdate">Last update</string>
-    <string name="newer">never</string>
+    <string name="newer">Never</string>
     <string name="nextLabel">Closer mote</string>
 </resources>

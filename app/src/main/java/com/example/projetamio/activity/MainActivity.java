@@ -149,25 +149,11 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(intentApp);
         });
 
-
-
-
         handler.post(run);
         handler.post(updateLocationMote);
 
-
-
-
-
         // Gestion de la case à cocher permettant le lancement de l'app au démarrage du téléphone
 
-        CheckBox startAtBoot = findViewById(R.id.startAtBoot);
-        startAtBoot.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("start At Boot", isChecked);
-            editor.apply();
-        });
     }
 
     @Override

@@ -20,37 +20,4 @@
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/nav_graph" />
 
-    <CheckBox
-        android:id="@+id/startAtBoot"
-        android:layout_width="192dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="104dp"
-        android:text="Lancer au démarrage"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
-        app:layout_constraintEnd_toStartOf="@+id/nav_host_fragment"
-        app:layout_constraintStart_toEndOf="@+id/nav_host_fragment" />
-
-    <TextView
-        android:id="@+id/moteCosestLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nextLabel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542" />
-
-    <TextView
-        android:id="@+id/valueMoteSoon"
-        android:layout_width="85dp"
-        android:layout_height="21dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.773"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.539" />
 </androidx.constraintlayout.widget.ConstraintLayout>
