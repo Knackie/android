@@ -66,6 +66,6 @@
     <string name="humidite">Humidité</string>
     <string name="batterylabel">Batterie</string>
     <string name="lastupdate">Dernère mise à jour</string>
-    <string name="newer">jamais</string>
+    <string name="newer">Jamais</string>
     <string name="nextLabel">Mote la plus proche</string>
 </resources>

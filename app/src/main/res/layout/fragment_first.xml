@@ -12,7 +12,7 @@
         android:id="@+id/TV1"
         android:layout_width="150dp"
         android:layout_height="24dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:text="@string/tat_du_t_l_chargement"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/imageDownloadStatus"
@@ -45,7 +45,7 @@
         android:id="@+id/imageDownloadStatus"
         android:layout_width="183dp"
         android:layout_height="104dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="-4dp"
         android:contentDescription="@string/power_description"
         android:src="@drawable/power_off"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,10 +57,10 @@
         android:id="@+id/labelLastUpdateMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="80dp"
         android:text="@string/lastupdate"
         app:layout_constraintEnd_toStartOf="@+id/dataLastUpdateMA"
-        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TV1" />
 
@@ -68,10 +68,33 @@
         android:id="@+id/dataLastUpdateMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="84dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageDownloadStatus" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/nextLabel"
+        app:layout_constraintBottom_toTopOf="@+id/toggle"
+        app:layout_constraintEnd_toStartOf="@+id/valueMoteSoon"
+        app:layout_constraintHorizontal_bias="0.203"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelLastUpdateMA"
+        app:layout_constraintVertical_bias="0.002" />
+
+    <TextView
+        android:id="@+id/valueMoteSoon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="80dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataLastUpdateMA" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
