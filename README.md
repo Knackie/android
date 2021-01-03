@@ -54,13 +54,13 @@ Parmis les réglages proposés, voici les élèments importants :
 Une option qui permet de lancer l'application au démarrage du téléphone.  
 
 <p align="center">
-  <img src="img/notifications.PNG" height="100" />
+  <img src="img/notifications.png" height="100" />
 </p>
 
 Les réglages sur les notifications, notamment l'activations de celles-ci et une plage d'activation définie par une heure de début et une heure de fin à définir.
 
 <p align="center">
-  <img src="img/notifications_mails.PNG" height="100" />
+  <img src="img/notifications_mails.png" height="100" />
 </p>
 
 Enfin les règlages des notifications par email, qui fonctionne du même principe que les notifications, avec une plage horaire qui varie en fonction du jour (en semaine / en week-end)
@@ -70,7 +70,7 @@ Enfin les règlages des notifications par email, qui fonctionne du même princip
 Pour afficher les dernières valeurs, il faut cliquer sur le bouton capteur.
 Celui redirige vers une liste de capteurs avec leurs états.
 <p align="center">
-  <img src="img/mote.PNG" height="100" />
+  <img src="img/mote.png" height="100" />
 </p>
 
 Par exemple, sur ce capteur, nous pouvons voir plusieurs informations :
