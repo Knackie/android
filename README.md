@@ -80,3 +80,7 @@ Par exemple, sur ce capteur, nous pouvons voir plusieurs informations :
 - La batterie du capteur, de 1% dans l'exemple,
 - Et la dernière date de reception d'une donnée du capteur, qui est du 18 Décembre 2020 à 19:44 d'après l'image,
 - La luminosité est représentée par l'icone de lampe, qui s'allume en jaune au dessus d'un certain seuil.
+
+# Fonctionnalités supplémentaires 
+
+L'application dispose d'un système de traduction, ce qui permet d'avoir l'application affichée en anglais ou en français selon la langue du téléphone.
