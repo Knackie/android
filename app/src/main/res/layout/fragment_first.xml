@@ -10,9 +10,9 @@
 
     <TextView
         android:id="@+id/TV1"
-        android:layout_width="150dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:text="@string/tat_du_t_l_chargement"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/imageDownloadStatus"
@@ -48,31 +48,35 @@
         android:layout_marginTop="-4dp"
         android:contentDescription="@string/power_description"
         android:src="@drawable/power_off"
+        app:layout_constraintBottom_toTopOf="@+id/dataLastUpdateMA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/TV1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.156" />
 
     <TextView
         android:id="@+id/labelLastUpdateMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="84dp"
         android:text="@string/lastupdate"
-        app:layout_constraintEnd_toStartOf="@+id/dataLastUpdateMA"
-        app:layout_constraintHorizontal_bias="0.326"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/TV1"
         app:layout_constraintTop_toBottomOf="@+id/TV1" />
 
     <TextView
         android:id="@+id/dataLastUpdateMA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:layout_marginEnd="84dp"
-        android:text="TextView"
+        android:gravity="center"
+        android:text="@string/newer"
+        app:layout_constraintBottom_toTopOf="@+id/valueMoteSoon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageDownloadStatus" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/valueMoteSoon"
+        app:layout_constraintTop_toTopOf="@+id/labelLastUpdateMA"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView"
@@ -81,20 +85,19 @@
         android:layout_marginTop="80dp"
         android:text="@string/nextLabel"
         app:layout_constraintBottom_toTopOf="@+id/toggle"
-        app:layout_constraintEnd_toStartOf="@+id/valueMoteSoon"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/labelLastUpdateMA"
         app:layout_constraintTop_toBottomOf="@+id/labelLastUpdateMA"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/valueMoteSoon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="80dp"
-        android:text="TextView"
+        android:layout_height="19dp"
+        android:gravity="center"
+        android:text="@string/newer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataLastUpdateMA" />
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
