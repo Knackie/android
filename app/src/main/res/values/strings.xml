@@ -79,4 +79,5 @@
     <string name="batterylabel">Battery</string>
     <string name="lastupdate">Last update</string>
     <string name="newer">never</string>
+    <string name="nextLabel">Closer mote</string>
 </resources>

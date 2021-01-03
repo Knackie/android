@@ -67,4 +67,5 @@
     <string name="batterylabel">Batterie</string>
     <string name="lastupdate">Dernère mise à jour</string>
     <string name="newer">jamais</string>
+    <string name="nextLabel">Mote la plus proche</string>
 </resources>

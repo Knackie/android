@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetamio.R;
 import com.example.projetamio.config.Parameters;
+import com.example.projetamio.services.ClosestMoteService;
 import com.example.projetamio.services.DatareceiverFromServerService;
 import com.example.projetamio.services.MainService;
 
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private Handler handler = new Handler();
 
+    /**
+     * Intent gérant la partie localisation des motes
+     */
+    private Intent servicelocatlisation;
+
 
     private Runnable run = new Runnable() {
         @Override
@@ -54,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             handler.postDelayed(this, 1000);
+        }
+    };
+
+    private Runnable updateLocationMote = new Runnable() {
+        @Override
+        public void run() {
+            TextView lastDate = findViewById(R.id.valueMoteSoon);
+            lastDate.setText(ClosestMoteService.getClosestMoteNomSimple());
+            handler.postDelayed(this, 500);
         }
     };
 
@@ -102,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
         //Gestion de l'affichage de l'état au démarrage de l'app
 
         Intent service = new Intent(this, MainService.class);
+        servicelocatlisation = new Intent(this, ClosestMoteService.class);
+        startService(servicelocatlisation);
         ImageView status = findViewById(R.id.imageDownloadStatus);
         if (MainService.active){
             status.setImageResource(R.drawable.power_on);
@@ -133,7 +150,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
         handler.post(run);
+        handler.post(updateLocationMote);
 
 
 
@@ -148,5 +168,11 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean("start At Boot", isChecked);
             editor.apply();
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(this.servicelocatlisation);
     }
 }
