@@ -84,3 +84,9 @@ Par exemple, sur ce capteur, nous pouvons voir plusieurs informations :
 # Fonctionnalités supplémentaires 
 
 L'application dispose d'un système de traduction, ce qui permet d'avoir l'application affichée en anglais ou en français selon la langue du téléphone.
+
+L'application dispose de test fonctionnel qu'il est possible de lancer via la commande :
+./gradlew connectedAndroidTest 
+
+Ils sont lancés automatiquement à chaque mise en place de nouveauté de versions sur la branche master de notre dépôt Github : [https://github.com/Knackie/android](https://github.com/Knackie/android)
+La génération de l'APK est aussi automatique lorsqu'un nouveau tag est envoyé sur Github, avec la création des asserts associés.
