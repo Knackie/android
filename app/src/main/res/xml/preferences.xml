@@ -2,10 +2,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
-        android:key="@string/username"
-        android:summary="@string/provide_username"
-        android:title="@string/yourname" />
-    <EditTextPreference
         android:id="@+id/pp_email_config"
         android:key="emailString"
         android:selectAllOnFocus="true"
