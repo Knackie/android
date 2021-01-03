@@ -34,13 +34,13 @@ Un bouton on/off permet l'activation ou la desactivation de ce menu.
 Un bouton capteur redirige vers les différents capteurs et les mesures associées.
 
 <p align="center">
-  <img src="img/sidebar_button.PNG" height="100" />
+  <img src="img/sidebar_button.PNG" height="75" />
 </p>
 
 Il est possible de définir des réglages en haut à droite en cliquant sur les 3 points.
 
 <p align="center">
-  <img src="img/preferences.PNG" height="100" />
+  <img src="img/preferences.PNG" height="75" />
 </p>
 
 # Réglages de l'application
@@ -54,13 +54,13 @@ Parmis les réglages proposés, voici les élèments importants :
 Une option qui permet de lancer l'application au démarrage du téléphone.  
 
 <p align="center">
-  <img src="img/notifications.png" height="100" />
+  <img src="img/notifications.png" height="200" />
 </p>
 
 Les réglages sur les notifications, notamment l'activations de celles-ci et une plage d'activation définie par une heure de début et une heure de fin à définir.
 
 <p align="center">
-  <img src="img/notifications_mails.png" height="100" />
+  <img src="img/notifications_mails.png" height="300" />
 </p>
 
 Enfin les règlages des notifications par email, qui fonctionne du même principe que les notifications, avec une plage horaire qui varie en fonction du jour (en semaine / en week-end)
@@ -70,7 +70,7 @@ Enfin les règlages des notifications par email, qui fonctionne du même princip
 Pour afficher les dernières valeurs, il faut cliquer sur le bouton capteur.
 Celui redirige vers une liste de capteurs avec leurs états.
 <p align="center">
-  <img src="img/mote.png" height="100" />
+  <img src="img/mote.png" height="200" />
 </p>
 
 Par exemple, sur ce capteur, nous pouvons voir plusieurs informations :
