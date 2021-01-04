@@ -100,11 +100,12 @@ public class MainActivity extends AppCompatActivity {
             }
             TextView lastDate = findViewById(R.id.valueMoteSoon);
             String text = ClosestMoteService.getClosestMoteNomSimple();
-            if (text == null){
-                lastDate.setText(getString(R.string.newer));
-            }
-            else{
-                lastDate.setText(text);
+            if (lastDate != null ) {
+                if (text == null) {
+                    lastDate.setText(getString(R.string.newer));
+                } else {
+                    lastDate.setText(text);
+                }
             }
 
             handler.postDelayed(this, 1000);
