@@ -80,4 +80,6 @@
     <string name="lastupdate">Last update</string>
     <string name="newer">Never</string>
     <string name="nextLabel">Closer mote</string>
+    <string name="title_add_location">Allow location permission</string>
+    <string name="text_add_location">We need your permission to allow this app locate the closet mote arround you</string>
 </resources>

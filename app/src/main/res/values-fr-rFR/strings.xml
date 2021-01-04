@@ -68,4 +68,6 @@
     <string name="lastupdate">Dernère mise à jour</string>
     <string name="newer">Jamais</string>
     <string name="nextLabel">Mote la plus proche</string>
+    <string name="title_add_location">Accorder l\'application à vous localiser</string>
+    <string name="text_add_location">Nous avons besoin de votre permsssion pour localiser la mote la mote la plus proche</string>
 </resources>

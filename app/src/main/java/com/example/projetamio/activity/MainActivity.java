@@ -1,7 +1,8 @@
 package com.example.projetamio.activity;
 
+import android.Manifest;
 import android.content.Intent;
-import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,23 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.projetamio.R;
 import com.example.projetamio.config.Parameters;
 import com.example.projetamio.services.ClosestMoteService;
 import com.example.projetamio.services.DatareceiverFromServerService;
 import com.example.projetamio.services.MainService;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -50,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
      * Intent gérant la partie localisation des motes
      */
     private Intent servicelocatlisation;
+
+
 
 
     private Runnable run = new Runnable() {
@@ -123,60 +118,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
+        servicelocatlisation = new Intent(this, ClosestMoteService.class);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.i(this.getClass().getName(), "Permission déjà accordée");
+            startService(servicelocatlisation);
+            handler.post(updateLocationMote);
+        } else {
+            // Permission to access the location is missing. Show rationale and request permission
+            new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.title_add_location))
+                    .setMessage(getString(R.string.text_add_location))
+                    .setIcon(android.R.drawable.ic_menu_mylocation)
+                    .setNeutralButton("Ok", (dialog, whichButton) -> requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION}, 0)
+                    ).show();
 
-        Task<LocationSettingsResponse> result =
-                LocationServices.getSettingsClient(this).checkLocationSettings(builder.build());
-
-        MainActivity save = this;
-
-
-
-        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
-                try {
-                    Log.d(this.getClass().getName(), "Avant");
-                    LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Log.d(this.getClass().getName(), "Après");
-                    // All location settings are satisfied. The client can initialize location
-                    // requests here.
-                } catch (ApiException exception) {
-                    Log.d(this.getClass().getName(), "Exception");
-                    switch (exception.getStatusCode()) {
-                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                            // Location settings are not satisfied. But could be fixed by showing the
-                            // user a dialog.
-                            try {
-                                // Cast to a resolvable exception.
-                                ResolvableApiException resolvable = (ResolvableApiException) exception;
-                                // Show the dialog by calling startResolutionForResult(),
-                                // and check the result in onActivityResult().
-                                resolvable.startResolutionForResult(
-                                        MainActivity.this,
-                                        LocationRequest.PRIORITY_HIGH_ACCURACY);
-                            } catch (IntentSender.SendIntentException e) {
-                                // Ignore the error.
-                            } catch (ClassCastException e) {
-                                // Ignore, should be an impossible error.
-                            }
-                            break;
-                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                            // Location settings are not satisfied. However, we have no way to fix the
-                            // settings so we won't show the dialog.
-                            break;
-                    }
-                }
-            }
-        });
+        }
         //Gestion de l'affichage de l'état au démarrage de l'app
 
         Intent service = new Intent(this, MainService.class);
-        servicelocatlisation = new Intent(this, ClosestMoteService.class);
-        startService(servicelocatlisation);
         ImageView status = findViewById(R.id.imageDownloadStatus);
         if (MainService.active){
             status.setImageResource(R.drawable.power_on);
@@ -208,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         handler.post(run);
-        handler.post(updateLocationMote);
 
         // Gestion de la case à cocher permettant le lancement de l'app au démarrage du téléphone
 
