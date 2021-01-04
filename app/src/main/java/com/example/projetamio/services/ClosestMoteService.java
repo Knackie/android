@@ -324,4 +324,5 @@ public class ClosestMoteService extends Service {
     private static synchronized void setClosestMoteSimple(String nomMote){
         closestMoteSimple = nomMote;
     }
+
 }

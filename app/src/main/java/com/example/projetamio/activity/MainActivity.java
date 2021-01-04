@@ -1,19 +1,21 @@
 package com.example.projetamio.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.projetamio.R;
@@ -28,6 +30,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = Parameters.PrefName;
+    private static final int PERMISSION_REQUEST_CODE = 1000;
 
     /**
      * Indique si le téléchargement est en cours
@@ -43,6 +46,26 @@ public class MainActivity extends AppCompatActivity {
      * Intent gérant la partie localisation des motes
      */
     private Intent servicelocatlisation;
+
+    /**
+     * Variable permettant de gérer la demande de localisation
+     */
+    private Boolean locationEnble = false;
+
+    /*private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Permission is granted. Continue the action or workflow in your
+                    // app.
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // features requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            });*/
+
 
 
 
@@ -71,8 +94,19 @@ public class MainActivity extends AppCompatActivity {
     private Runnable updateLocationMote = new Runnable() {
         @Override
         public void run() {
+            if (!locationEnble){
+
+                locationEnble = true;
+            }
             TextView lastDate = findViewById(R.id.valueMoteSoon);
-            lastDate.setText(ClosestMoteService.getClosestMoteNomSimple());
+            String text = ClosestMoteService.getClosestMoteNomSimple();
+            if (text == null){
+                lastDate.setText(getString(R.string.newer));
+            }
+            else{
+                lastDate.setText(text);
+            }
+
             handler.postDelayed(this, 1000);
         }
     };
@@ -119,21 +153,18 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         servicelocatlisation = new Intent(this, ClosestMoteService.class);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.i(this.getClass().getName(), "Permission déjà accordée");
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                showExplanation(getString(R.string.title_add_location), getString(R.string.text_add_location), Manifest.permission.ACCESS_FINE_LOCATION, PERMISSION_REQUEST_CODE);
+            } else {
+                requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, PERMISSION_REQUEST_CODE);
+            }
+        } else {
             startService(servicelocatlisation);
             handler.post(updateLocationMote);
-        } else {
-            // Permission to access the location is missing. Show rationale and request permission
-            new AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.title_add_location))
-                    .setMessage(getString(R.string.text_add_location))
-                    .setIcon(android.R.drawable.ic_menu_mylocation)
-                    .setNeutralButton("Ok", (dialog, whichButton) -> requestPermissions(new String[]{
-                            Manifest.permission.ACCESS_FINE_LOCATION}, 0)
-                    ).show();
-
         }
         //Gestion de l'affichage de l'état au démarrage de l'app
 
@@ -169,16 +200,50 @@ public class MainActivity extends AppCompatActivity {
         });
 
         handler.post(run);
+        handler.post(updateLocationMote);
 
         // Gestion de la case à cocher permettant le lancement de l'app au démarrage du téléphone
 
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        stopService(this.servicelocatlisation);
-        handler.removeCallbacks(run);
-        handler.removeCallbacks(updateLocationMote);
+    public void onRequestPermissionsResult(
+            int requestCode,
+            String permissions[],
+            int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Toast.makeText(MainActivity.this, "Permission Granted!", Toast.LENGTH_SHORT).show();
+                    startService(servicelocatlisation);
+                    handler.post(updateLocationMote);
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+                }
+        }
+    }
+
+
+    private void showExplanation(String title,
+                                 String message,
+                                 final String permission,
+                                 final int permissionRequestCode) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        requestPermission(permission, permissionRequestCode);
+                    }
+                });
+        builder.create().show();
+    }
+
+    private void requestPermission(String permissionName, int permissionRequestCode) {
+        ActivityCompat.requestPermissions(this,
+                new String[]{permissionName}, permissionRequestCode);
     }
 }
